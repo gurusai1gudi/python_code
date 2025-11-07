@@ -3399,5 +3399,14 @@ s=input()
 k=int(input())
 print(value(s,k))
 '''
+# permuation extension
+s = input()
+rev = s[::-1]
+
+for i in range(len(s)):
+    if s[i:] == rev[:len(s)-i]:
+        extension = rev[len(s)-i:]
+        print(extension)
+        break
 
 
