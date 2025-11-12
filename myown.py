@@ -3400,6 +3400,7 @@ k=int(input())
 print(value(s,k))
 '''
 # permuation extension
+'''
 s = input()
 rev = s[::-1]
 
@@ -3408,5 +3409,29 @@ for i in range(len(s)):
         extension = rev[len(s)-i:]
         print(extension)
         break
-
-
+'''
+# deloittesh
+'''
+str="myprogram"
+new=[]
+for i in range(0,len(str)-1,2):
+    new.append(str[i:i+2])
+if len(str)%2!=0:
+    new.append(str[-1])
+print(*new)
+'''
+#
+str="myprogram"
+substring=[]
+for i in range(len(str)):
+    for j in range(i,len(str)):
+        substring.append(str[i:j+1])
+new=[]
+for sub in substring:
+    if len(sub) == 2:
+        start_index = str.index(sub)
+        if start_index % 2 == 0:
+            new.append(sub)
+if len(str) % 2 != 0:
+    new.append(str[-1])
+print(*new)
