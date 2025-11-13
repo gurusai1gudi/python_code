@@ -3421,6 +3421,7 @@ if len(str)%2!=0:
 print(*new)
 '''
 #
+'''
 str="myprogram"
 substring=[]
 for i in range(len(str)):
@@ -3435,3 +3436,30 @@ for sub in substring:
 if len(str) % 2 != 0:
     new.append(str[-1])
 print(*new)
+'''
+# encryption problem
+import math
+text = "haveaniceday"
+length = len(text)
+sqrt = math.sqrt(length)
+grid = []
+encrypted = []
+
+for i in range(length):
+    if sqrt <= i + 1 and sqrt > i:
+        row = i
+        col = i + 1
+        break
+for r in range(row):
+    start = r * col
+    end = start + col
+    grid.append(text[start:end])
+for c in range(col):
+    word = ""
+    for r in range(row):
+        if c < len(grid[r]):
+            word += grid[r][c]
+    encrypted.append(word)
+print(" ".join(encrypted))
+
+
