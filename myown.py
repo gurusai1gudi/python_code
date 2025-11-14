@@ -3438,6 +3438,7 @@ if len(str) % 2 != 0:
 print(*new)
 '''
 # encryption problem
+'''
 import math
 text = "haveaniceday"
 length = len(text)
@@ -3461,5 +3462,20 @@ for c in range(col):
             word += grid[r][c]
     encrypted.append(word)
 print(" ".join(encrypted))
+'''
+#mincost to merge elements
+def min_cost(arr):
+    while len(arr) > 1:
+        min_cost = float('inf')
+        min_index = -1
+        for i in range(len(arr) - 1):
+            cost = arr[i] + arr[i + 1]
+            if cost < min_cost:
+                min_cost = cost
+                min_index = i
+        arr[min_index] = min_cost
+        arr.pop(min_index + 1)
 
+    return arr[0]
+print(min_cost([5,3,5,2]))
 
