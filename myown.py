@@ -3464,6 +3464,7 @@ for c in range(col):
 print(" ".join(encrypted))
 '''
 #mincost to merge elements
+'''
 def min_cost(arr):
     while len(arr) > 1:
         min_cost = float('inf')
@@ -3475,7 +3476,22 @@ def min_cost(arr):
                 min_index = i
         arr[min_index] = min_cost
         arr.pop(min_index + 1)
-
     return arr[0]
 print(min_cost([5,3,5,2]))
-
+'''
+#minoperations
+'''
+def get_min_op(arr):
+    new=[]
+    for char in arr:
+        binary=bin(char)[2:].zfill(2)
+        new.append(binary)
+    op_count=0
+    first=new[0]
+    for b in new[1:]:
+        for i in range(len(b)):
+            if b[i]!=first[i]:
+                op_count+=1
+    return op_count
+print(get_min_op([1,2]))
+'''
