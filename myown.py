@@ -3495,3 +3495,61 @@ def get_min_op(arr):
     return op_count
 print(get_min_op([1,2]))
 '''
+#group anagrams
+'''
+arr=list(map(str,input().split()))
+groups=[]
+while len(arr)>0:
+    new=arr[0]
+    key=sorted(new)
+    ram=[new]
+    i=1
+    while i<len(arr):
+        if sorted(arr[i])==key:
+            ram.append(arr[i])
+            arr.pop(i)
+            i-=1
+        i+=1
+    arr.pop(0)
+    groups.append(ram)
+print(groups)
+'''
+#maximum number of 2*2 squares that can be fit inside a right isocelous triangle
+'''
+length=int(input())
+new=(length-2)//2
+ram=0
+for i in range(1,new+1):
+    ram+=i
+print(ram)
+'''
+#count elements greater than previous average
+import math
+'''
+def avg(ele):
+    average=sum(ele)/len(ele)
+    return average
+resp=list(map(int,input().split()))
+count=0
+for i in range(len(resp)):
+    if i!=0:
+        if resp[i]>avg(resp[:i]):
+            count+=1
+print(count)
+'''
+#merge and sort intervals
+intervals=[[1,3],[2,6],[8,10],[15,18]]
+merged_interval=[]
+merged_interval.append(intervals[0])
+for i in range(1,len(intervals)):
+    current=intervals[i]
+    last=merged_interval[-1]
+    if current[0]<=last[1]:
+        last[1]=max(last[1],current[1])
+    else:
+        merged_interval.append(current)
+print(merged_interval)
+
+
+
+
