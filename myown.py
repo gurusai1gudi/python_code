@@ -3538,6 +3538,7 @@ for i in range(len(resp)):
 print(count)
 '''
 #merge and sort intervals
+'''
 intervals=[[1,3],[2,6],[8,10],[15,18]]
 merged_interval=[]
 merged_interval.append(intervals[0])
@@ -3549,6 +3550,40 @@ for i in range(1,len(intervals)):
     else:
         merged_interval.append(current)
 print(merged_interval)
+'''
+# longest common prefix
+'''
+def longest_common_prefix(words):
+    first = words[0]
+    result = ""
+
+    for i in range(len(first)):
+        sub = first[:i+1]      
+        for word in words:
+            if not word.startswith(sub):
+                return result
+        result = sub
+
+    return result
+
+
+words = input().split()
+print(longest_common_prefix(words))
+'''
+####
+
+def searchRange(nums, target):
+    for i in range(len(nums)):
+        if nums[i] == target:
+            start_index = i
+            for j in range(start_index, len(nums)):
+                if nums[j] == target:
+                    end_index = j
+            return [start_index,end_index]
+    return [-1,-1]
+ram=searchRange([5,7,7,8,8,10],8)
+print(ram)
+
 
 
 
