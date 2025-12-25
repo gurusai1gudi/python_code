@@ -3570,8 +3570,8 @@ def longest_common_prefix(words):
 words = input().split()
 print(longest_common_prefix(words))
 '''
-####
-
+#### find first and last position of an index
+'''
 def searchRange(nums, target):
     for i in range(len(nums)):
         if nums[i] == target:
@@ -3583,6 +3583,51 @@ def searchRange(nums, target):
     return [-1,-1]
 ram=searchRange([5,7,7,8,8,10],8)
 print(ram)
+'''
+#count and say
+'''
+n=int(input())
+first_count="1"
+print(first_count)
+for i in range(n-1):
+    result=""
+    c=1
+    for j in range(1,len(first_count)):
+        if first_count[j]==first_count[j-1]:
+            c+=1
+        else:
+            result += str(c) + first_count[j - 1]
+            c = 1
+    result += str(c) + first_count[-1]
+    first_count = result
+    print(first_count)
+'''
+#combination sum
+'''
+def combinationSum(candidates, target):
+    result = []
+    def solve(start,path,total):
+        if total==target:
+            result.append(path)
+            return
+        if total>target:
+            return
+        for i in range(start,len(candidates)):
+            solve(i,path+[candidates[i]],total-candidates[i])
+'''
+#jump game
+nums = [2, 3, 1, 1, 4]
+count = 0
+i = 0
+while i < len(nums) - 1:
+    count = count + 1
+    best = i
+    for j in range(i + 1, i + nums[i] + 1):
+        if j < len(nums):
+            if j + nums[j] > best + nums[best]:
+                best = j
+    i = best
+print(count)
 
 
 
