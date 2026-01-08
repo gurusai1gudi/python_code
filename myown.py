@@ -3616,6 +3616,7 @@ def combinationSum(candidates, target):
             solve(i,path+[candidates[i]],total-candidates[i])
 '''
 #jump game
+'''
 nums = [2, 3, 1, 1, 4]
 count = 0
 i = 0
@@ -3628,6 +3629,59 @@ while i < len(nums) - 1:
                 best = j
     i = best
 print(count)
+'''
+#maximum subarray
+'''
+nums = [-2,1,-3,4,-1,2,1,-5,4]
+subarray = []
+max_sub=0
+for i in range(len(nums)-1):
+    for j in range(i + 1, len(nums)-1):
+        subarray.append(nums[i:j+1])
+for char in subarray:
+    if sum(char)>max_sub:
+        max_sub=sum(char)
+print(max_sub)
+'''
+#rotate list
+'''
+head=[1,2,3,4,5]
+k=2
+i=0
+while i<k:
+    new=head.pop(-1)
+    i+=1
+    head.insert(0,new)
+print(head)
+'''
+#
+'''
+nums = list(map(int, input().split()))
+for i in range(1, len(nums) + 2):
+    if i in nums:
+        continue
+    else:
+        print(i)
+        break
+'''
+#
+n = 4
+k = 2
+new=[]
+def combinations(start, curr):
+    if len(curr) == k:
+        new.append(curr)
+        return
+
+    for i in range(start, n+1):
+        combinations(i+1, curr + [i])
+
+combinations(1, [])
+print(new)
+
+
+
+
 
 
 
