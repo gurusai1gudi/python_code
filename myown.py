@@ -5,6 +5,8 @@ num1=4
 num2=5
 print(sum_addition(num1,num2))
 '''
+from typing import List
+
 from django.core.files import temp
 from numpy._core.strings import upper
 from sklearn.covariance import ledoit_wolf
@@ -3665,6 +3667,7 @@ for i in range(1, len(nums) + 2):
         break
 '''
 #
+'''
 n = 4
 k = 2
 new=[]
@@ -3678,6 +3681,125 @@ def combinations(start, curr):
 
 combinations(1, [])
 print(new)
+'''
+#combination sum
+'''
+candidates=[10,1,2,7,6,1,5]
+target=8
+sub_array=[]
+
+for i in range(len(candidates)):
+    for j in range(i, len(candidates)):
+        array = candidates[i:j+1]
+        sub_array.append(array)
+
+for char in sub_array:
+    if sum(char)==target:
+        print(char)
+'''
+'''
+s = [[5,3,4],
+     [1,5,8],
+     [6,4,2]]
+
+magic = [
+    [[8,1,6],[3,5,7],[4,9,2]],
+    [[6,1,8],[7,5,3],[2,9,4]],
+    [[4,9,2],[3,5,7],[8,1,6]],
+    [[2,9,4],[7,5,3],[6,1,8]],
+    [[8,3,4],[1,5,9],[6,7,2]],
+    [[4,3,8],[9,5,1],[2,7,6]],
+    [[6,7,2],[1,5,9],[8,3,4]],
+    [[2,7,6],[9,5,1],[4,3,8]]
+]
+
+min_cost = 1000   # big number
+
+for m in magic:
+    cost = 0
+    for i in range(3):
+        for j in range(3):
+            cost += abs(s[i][j] - m[i][j])
+    if cost < min_cost:
+        min_cost = cost
+
+print(min_cost)
+'''
+#coding question
+'''
+string=input()
+space_count=string.count(" ")
+if space_count==0:
+    print(string+"%40")
+elif space_count==1:
+    new=""
+    for ch in string:
+        if ch==" ":
+            new+="%20"
+        else:
+            new+=ch
+    print(new)
+elif space_count == 2:
+    new = ""
+    for ch in string:
+        if ch == " ":
+            new += "%30"
+        else:
+            new += ch
+    print(new)
+'''
+#
+'''
+class InvalidPasswordException(Exception):
+    pass
+string=input()
+try:
+    if len(string)>=8 and any(char.isupper() for char in string) and any(char.islower() for char in string) and any(char.isnumeric() for char in string) and any(not char.isalnum() for char in string):
+        print("password is valid")
+    else:
+        raise InvalidPasswordException
+except:
+    print("invalid password")
+'''
+#combination
+'''
+def combination(open, close):
+    if open == close == n:
+        print("".join(new))
+        return
+    if open < n:
+        new.append("(")
+        combination(open + 1, close)
+        new.pop()
+
+    if close < open:
+        new.append(")")
+        combination(open, close + 1)
+        new.pop()
+
+n = int(input())
+new = []
+combination(0, 0)
+'''
+# minimum path sum
+def min_cost(grid):
+    for row in range(len(grid)):
+        for col in range(len(grid[0])):
+            if row == 0 and col != 0:
+                grid[row][col] += grid[row][col-1]
+            elif col == 0 and row != 0:
+                grid[row][col] += grid[row-1][col]
+            elif row != 0 and col != 0:
+                grid[row][col] += min(grid[row-1][col], grid[row][col-1])
+
+    return grid[-1][-1]
+grid=[[1,2,3],[4,5,6]]
+print(min_cost(grid))
+
+
+
+
+
 
 
 
