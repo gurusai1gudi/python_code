@@ -11,6 +11,7 @@ from django.core.files import temp
 from numpy._core.strings import upper
 from sklearn.covariance import ledoit_wolf
 from sympy.codegen.cnodes import sizeof
+from tenacity import wait_exponential_jitter
 
 '''
 def int_to_str(num):
@@ -3782,6 +3783,7 @@ new = []
 combination(0, 0)
 '''
 # minimum path sum
+'''
 def min_cost(grid):
     for row in range(len(grid)):
         for col in range(len(grid[0])):
@@ -3793,19 +3795,215 @@ def min_cost(grid):
                 grid[row][col] += min(grid[row-1][col], grid[row][col-1])
 
     return grid[-1][-1]
-grid=[[1,2,3],[4,5,6]]
+grid=[[1,3,5],[2,3,6]]
 print(min_cost(grid))
+'''
+#
+'''
+n=int(input())
+ugly_numbers=[]
+i=1
+while len(ugly_numbers)<n:
+    x=i
+    while x%2==0:
+        x//=2
+    while x%3==0:
+        x//=3
+    while x%5==0:
+        x//=5
+    if x==1:
+        ugly_numbers.append(i)
+    i+=1
+print(ugly_numbers[-1])
+'''
+#longest_substring with k unique characters
+'''
+s = "aabacbebebe"
+k = 3
+max_substring = ""
+substring = []
+for i in range(len(s)):
+    for j in range(i, len(s)):
+        substring.append(s[i:j+1])
+for char in substring:
+    new = []
+    for c in char:
+        if c not in new:
+            new.append(c)
+    if len(new) == k and len(char) > len(max_substring):
+        max_substring = char
+print(max_substring)
+'''
+#####
+''''
+nums = int(input())
+digits = list(str(nums))
+max_number = nums
+for i in range(len(digits)):
+    for j in range(i + 1, len(digits)):
+        digits[i], digits[j] = digits[j], digits[i]
+        current = int("".join(digits))
+        if current > max_number:
+            max_number = current
+        digits[i], digits[j] = digits[j], digits[i]
+print(max_number)
+'''
+#
+'''
+input2 = ["AAA00000", "CCC0003", "ABA0001"]
+kar = []
+def lexographical(min_plates):
+    s1 = min_plates[0]
+    s2 = min_plates[1]
 
+    for i in range(len(s1)):
+        if s1[i] < s2[i]:
+            print("Lexicographically first:", s1)
+            return
+        elif s1[i] > s2[i]:
+            print("Lexicographically first:", s2)
+            return
+    print("Lexicographically first:", s1)
+for char in input2:
+    alpha_sum = 0
+    num_sum = 0
 
+    for bar in char:
+        if bar.isalpha():
+            alpha_sum += (ord(bar.lower()) - 96)
+        elif bar.isdigit():
+            num_sum += int(bar)
 
-
-
-
-
-
-
-
-
-
-
+    kar.append({char: abs(alpha_sum - num_sum)})
+first_dict = kar[0]
+min_value = list(first_dict.values())[0]
+min_plates = []
+count=0
+for d in kar:
+    for key, value in d.items():
+        if value < min_value:
+            min_value = value
+for d in kar:
+    for key, value in d.items():
+        if value == min_value:
+            min_plates.append(key)
+            count += 1
+print(min_value)
+for plate in min_plates:
+    print(plate)
+print(count)
+if count==2:
+    lexographical(list(min_plates))
+'''
+#linked list
+'''
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def insert_at_begining(self, value):
+        new_node = Node(value)
+        new_node.next = self.head
+        self.head = new_node
+    def insert_at_end(self, value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next != None:
+            current = current.next
+        current.next = new_node
+    def print_list(self):
+        current = self.head
+        while current != None:
+            print(current.value, end=" -> ")
+            current = current.next
+        print("None")
+    def length(self):
+        count = 0
+        current = self.head
+        while current != None:
+            count += 1
+            current = current.next
+        return count
+    def insert_at_middle(self, value):
+        new_node = Node(value)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        count = 0
+        mid = self.length() // 2
+        while count < mid - 1:
+            current = current.next
+            count += 1
+        new_node.next = current.next
+        current.next = new_node
+added = LinkedList()
+added.insert_at_begining(3)
+added.insert_at_end(10)
+added.insert_at_end(5)
+added.insert_at_end(2)
+added.insert_at_middle(8)
+added.print_list()
+print(added.length())
+'''
+# double_linked_list
+'''
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
+        self.prev = None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def insert_at_begining(self, value):
+        new_node = Node(value)
+        new_node.prev=None
+        new_node.next=self.head
+        if self.head is not None:
+            self.head.prev = new_node
+        self.head = new_node
+    def print_list(self):
+        current=self.head
+        while current != None:
+            print(current.value, end=" -> ")
+            current=current.next
+    def insert_at_end(self, value):
+        new_node = Node(value)
+S=LinkedList()
+S.insert_at_begining(3)
+S.insert_at_begining(10)
+S.print_list()
+'''
+#finding all anagrams in a string
+'''
+s = input()
+p = input()
+result = [i for i in range(len(s))
+          for j in range(i, len(s))
+          if sorted(s[i:j+1]) == sorted(p)]
+print(result)
+'''
+#check for subsequence
+'''
+A = "gksrek"
+B = "geeksforgeeks"
+new = ""
+for i in range(len(A)):
+    for j in range(len(B)):
+        if A[i] == B[j]:
+            new=new+A[i]
+            B = B[j+1:]
+            break
+if new==A:
+    print(1)
+else:
+    print(0)
+'''
 
