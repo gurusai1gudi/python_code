@@ -4007,3 +4007,303 @@ else:
     print(0)
 '''
 
+#linked_list_operations
+'''
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class Linked_list:
+    def __init__(self):
+        self.head = None
+    def insert_at_beginning(self,data):
+        new_node=Node(data)
+        new_node.next=self.head
+        self.head=new_node
+    def search_single_linked_list(self,target):
+        current=self.head
+        while current is not None:
+            if current.data==target:
+                return True
+            current = current.next
+        return False
+    def print_ll(self):
+        current=self.head
+        while current is not None:
+            print(current.data, end=" -> ")
+            current=current.next
+    def insert_at_end(self,data):
+        new_node = Node(data)
+        current=self.head
+        while current.next is not None:
+            current = current.next
+        current.next = new_node
+    def delete_at_first(self):
+        self.head = self.head.next
+    def delete_at_end(self):
+        current = self.head
+        while current.next.next is not None:
+            current=current.next
+        current.next=None
+new=Linked_list()
+new.insert_at_beginning(34)
+new.insert_at_beginning(20)
+new.insert_at_beginning(43)
+new.insert_at_end(23)
+new.delete_at_first()
+new.delete_at_end()
+print(new.search_single_linked_list(20))
+new.print_ll()
+'''
+# Transpose matrix
+'''
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+transp=[]
+for i in range(len(matrix)):
+    new=[]
+    for j in range(len(matrix)):
+        new.append(matrix[j][i])
+    transp.append(new)
+print(transp)
+'''
+#toeplitz matrix
+'''
+matrix = [[1,2,3,4],[5,1,2,3],[9,5,1,2]]
+is_toeplitz=True
+ram=[]
+for i in range(1,len(matrix)):
+    for j in range(1,len(matrix[0])):
+        if i!=0:
+            if matrix[i][j]!=matrix[i-1][j-1]:
+                is_toeplitz=False
+                break
+            else:
+                ram.append(matrix[i][j])
+        if not is_toeplitz:
+            break
+print(is_toeplitz)
+print(ram)
+'''
+#camelcase matching
+'''
+queries = ["FooBar", "FooBarTest", "FootBall", "FrameBuffer", "ForceFeedBack"]
+pattern = "FB"
+final = []
+
+for char in queries:
+    capital = ""
+    for word in char:
+        if word == word.upper():
+            capital += word
+
+    if capital == pattern:
+        final.append(True)
+    else:
+        final.append(False)
+
+print(final)
+'''
+#maths
+'''
+a = 2
+b = [1,0]
+new=""
+for char in b:
+    new+=str(char)
+power=a**int(new)
+mod=power%1337
+print(mod)
+'''
+#zigzag conversion
+'''
+s = "PAYPALISHIRING"
+numRows = 3
+rows = [""] * numRows
+direction=1
+current_row=0
+for char in s:
+    rows[current_row]+=char
+    if current_row==numRows-1:
+        direction=-1
+    elif current_row==0:
+        direction=1
+    current_row+=direction
+print("".join(rows))
+'''
+#letter combination of a phone number
+'''
+mapping = {
+    "2": "abc",
+    "3": "def",
+    "4": "ghi",
+    "5": "jkl",
+    "6": "mno",
+    "7": "pqrs",
+    "8": "tuv",
+    "9": "wxyz"
+}
+
+digits = "23"
+result=[""]
+for char in digits:
+    new = []
+    if char in mapping:
+        for prev in result:
+            for letter in mapping[char]:
+                new.append(prev+letter)
+    result=new
+print(result)
+'''
+# Swap Nodes in Pairs
+'''
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+class Linked_list:
+    def __init__(self):
+        self.head = None
+
+    def insert_at_end(self, data):
+        new_node = Node(data)
+
+        if self.head is None:
+            self.head = new_node
+            return
+
+        current = self.head
+        while current.next is not None:
+            current = current.next
+
+        current.next = new_node
+
+    def swap(self):
+        temp = self.head
+
+        while temp and temp.next:
+            temp.data, temp.next.data = temp.next.data, temp.data
+            temp = temp.next.next
+
+
+    def display(self):
+        temp = self.head
+        while temp:
+            print(temp.data, end=" ")
+            temp = temp.next
+        print()
+    def Nth_node_from_end(self,n):
+        slow = self.head
+        fast = self.head
+        for _ in range(n):
+            fast = fast.next
+        if fast is None:
+            self.head = self.head.next
+            return self.head
+
+        while fast.next:
+            slow = slow.next
+            fast = fast.next
+
+        slow.next = slow.next.next
+# Input
+values = list(map(int, input().split()))
+ll = Linked_list()
+
+for v in values:
+    ll.insert_at_end(v)
+ll.Nth_node_from_end(2)
+
+
+ll.display()
+'''
+
+#tap academy
+'''
+n=5
+k=4
+heights=[1,6,3,5,2]
+max_height=max(heights)
+if max_height==k:
+    print("yes")
+else:
+    print("NO")
+    new=max_height-k
+    print(new)
+'''
+# 3 Sum closest
+'''
+nums = [-1,2,1,-4]
+sun = []
+i = 0
+while i < len(nums):
+    j = i + 1
+    while j < len(nums):
+        k = j + 1
+        while k < len(nums):
+            temp = nums[i] + nums[j] + nums[k]
+            sun.append(temp)
+            k += 1
+        j += 1
+    i += 1
+positive=[]
+for sun in sun:
+    if sun>0:
+        positive.append(sun)
+if positive:
+    print(min(positive))
+'''
+# double_linked_list
+'''
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.prev=None
+        self.next=None
+class double_linked_list:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+    def insert_at_beginning(self,data):
+        new_node=Node(data)
+        new_node.next=self.head
+        new_node.prev = None
+        self.head=new_node
+    def insert_at_end(self,data):
+        new_node = Node(data)
+        new_node.prev=self.tail
+        self.tail.next=new_node
+        self.tail=new_node
+
+    def delete_at_beginning(self):
+        self.head=self.head.next
+        self.head.prev=None
+    def delete_at_end(self):
+        self.tail=self.tail.prev
+        self.tail.next=None
+'''
+#permutations
+nums = [1, 2, 3]
+nums.sort()  # print first permutation
+while True:
+    pivot = -1   # reset every loop
+    # Step 1: find pivot
+    for i in range(len(nums)-2, -1, -1):
+        if nums[i] < nums[i+1]:
+            pivot = i
+            break
+    # If no pivot → stop loop
+    if pivot == -1:
+        break
+    # Step 2: find next greater from right
+    for j in range(len(nums)-1, pivot, -1):
+        if nums[j] > nums[pivot]:
+            nums[j], nums[pivot] = nums[pivot], nums[j]
+            break
+    # Step 3: reverse right part
+    left = pivot + 1
+    right = len(nums) - 1
+    while left < right:
+        nums[left], nums[right] = nums[right], nums[left]
+        left += 1
+        right -= 1
+    print(nums)
