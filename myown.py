@@ -7,6 +7,7 @@ print(sum_addition(num1,num2))
 '''
 from typing import List
 
+from django.contrib.sitemaps.views import index
 from django.core.files import temp
 from numpy._core.strings import upper
 from sklearn.covariance import ledoit_wolf
@@ -4282,6 +4283,7 @@ class double_linked_list:
         self.tail.next=None
 '''
 #permutations
+'''
 nums = [1, 2, 3]
 nums.sort()  # print first permutation
 while True:
@@ -4307,3 +4309,313 @@ while True:
         left += 1
         right -= 1
     print(nums)
+'''
+# H-Index
+'''
+citations = [3,0,6,1,5]
+ans=0
+for i in range(len(citations)+1):
+    count=0
+    for j  in range(len(citations)):
+        if citations[j]>=i:
+            count+=1
+    if count>=i:
+        ans=i
+print(ans)
+'''
+#validate email
+'''
+emails = [
+    "test.email+alex@leetcode.com",
+    "test.e.mail+bob.cathy@leetcode.com",
+    "testemail+david@lee.tcode.com"
+]
+def validate(mail):
+    local, domain = email.split("@")
+    local=local.split("+")[0]
+    local=local.replace(".","")
+    clean_mail=local+"@"+domain
+    return  clean_mail
+unique=set()
+for email in emails:
+    clean=validate(email)
+    unique.add(clean)
+print(len(unique))
+'''
+#max_number of fruits can hold
+'''
+fruits = [0,0,2,1]
+key_value = {}
+left=0
+right=len(fruits)-1
+max_length=0
+for fruit in fruits:
+    if fruit not in key_value:
+        key_value[fruit] = 1
+    else:
+        key_value[fruit] += 1
+
+    while len(key_value) > 2:
+        right_fruit=fruits[right]
+        left_fruit = fruits[left]
+        if key_value[right_fruit] < key_value[left_fruit]:
+            key_value[right_fruit]-=1
+        key_value[left_fruit] -= 1
+
+        if key_value[left_fruit] == 0:
+            del key_value[left_fruit]
+        elif key_value[right_fruit] == 0:
+            del key_value[right_fruit]
+
+        left += 1
+        right-=1
+    current_length = sum(key_value.values())
+    if current_length > max_length:
+        max_length = current_length
+
+print(max_length)
+'''
+#validate
+''''
+emails = [
+    "test.email+alex@leetcode.com",
+    "test.e.mail+bob.cathy@leetcode.com",
+    "testemail+david@lee.tcode.com"
+]
+
+def validate(mail):
+    local, domain = mail.split("@")
+    name_part=domain.replace(".com","")
+    if "." in name_part:
+        return "invalid"
+    return"valid"
+for mail in emails:
+    print(validate(mail))
+'''
+# tcs next step
+'''
+n=int(input())
+arr=list(map(int,input().split()))
+count=0
+i=0
+for j in range(i+1,len(arr)):
+    if arr[i]!=arr[j]:
+        count+=1
+print(count)
+'''
+#tcs nextstep2
+'''
+N = int(input())
+K = int(input())
+prices = list(map(int, input().split()))
+start = 0
+sum_find = 0
+max_length = 0
+
+for end in range(N):
+    sum_find += prices[end]
+
+    while sum_find >= K:
+        sum_find -= prices[start]
+        start += 1
+
+    length = end - start + 1
+    if length > max_length:
+        max_length = length
+
+print(max_length)
+'''
+#tcs next step3
+'''
+N =int(input())
+K = int(input())
+list_new=[]
+list_map=list(map(int,input().split()))
+for i in range(len(list_map)):
+    for j in range(i,len(list_map)):
+        sub=list_map[i:j+1]
+        if sum(sub)==K:
+            print(i+1,j+1)
+            print(sub)
+            exit()
+'''
+# drum beat
+'''
+N = 5
+board = [2, 3, 1, 5, 4]
+board_dict = {}
+for i in range(len(board)):
+    board_dict[i + 1] = board[i]
+original = board_dict.copy()
+count = 0
+print("Start:", board_dict)
+while True:
+    new_dict = {}
+    for key in board_dict:
+        new_dict[key] = original[board_dict[key]]
+    board_dict = new_dict
+    count += 1
+    print("After beat", count, ":", board_dict)
+    if board_dict == original:
+        break
+print("Total beats:", count)
+'''
+# subset
+'''
+A = "abcab"
+B = "aabab"
+count_moves = 0
+A=list(A)
+B=list(B)
+n=len(A)
+while True:
+    new=[]
+    target=[]
+    for i in range(n):
+        if A[i]!=B[i]:
+            if A[i]<B[i]:
+                print(-1)
+                exit()
+            new.append(A[i])
+            target.append(B[i])
+    if not new:
+        break
+    ram2=max(target)
+    final_postions=[]
+    for i in range(n):
+        if A[i]!=B[i] and B[i]==ram2:
+            final_postions.append(i)
+    for i in final_postions:
+        A[i]=ram2
+    count_moves += 1
+print(count_moves)
+'''
+#########################
+'''
+N=int(input())
+new=str(N)
+mul=1
+for char in new:
+    mul*=int(char)
+print(mul)
+'''
+######################
+'''
+p = 10000
+T = 20
+
+rate1 = [
+    {"year": 5, "rate": 9.5},
+    {"year": 10, "rate": 9.6},
+    {"year": 5, "rate": 8.5}
+]
+
+rate2 = [
+    {"year": 10, "rate": 6.9},
+    {"year": 5, "rate": 8.5},
+    {"year": 5, "rate": 7.9},
+]
+
+def calculate_total_interest(p, rates):
+    principal = p
+    total_payment = 0
+
+    for rate in rates:
+        monthly_rate = rate["rate"] / (12 * 100)
+        months = rate["year"] * 12
+
+        EMI = (principal * monthly_rate) / (1 - (1 / (1 + monthly_rate) ** months))
+
+        for _ in range(months):
+            interest = principal * monthly_rate
+            principal -= (EMI - interest)
+
+        total_payment += EMI * months
+
+    return total_payment - p
+
+
+interest1 = calculate_total_interest(p, rate1)
+interest2 = calculate_total_interest(p, rate2)
+
+if interest1 < interest2:
+    print("Bank A")
+else:
+    print("Bank B")
+'''
+#####################
+'''
+string=input()
+T=20
+new=[]
+for char in string:
+    position = ord(char.upper()) - ord('A') + 1
+    new.append(position+T)
+print(new)
+'''
+########primes checking
+'''
+N = int(input())
+
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+sum = 0
+count = 0
+
+for num in range(2, N+1):
+    if is_prime(num):
+        sum += num
+        if sum > N:
+            break
+        if sum>=3 and is_prime(sum):
+            count += 1
+print(count)
+print(sum)
+'''
+#rock problem
+'''
+S, R = map(int, input().split())
+arr = list(map(int, input().split()))
+new=[]
+ranges = []
+for _ in range(R):
+    low, high = map(int, input().split())
+    ranges.append((low, high))
+
+for low, high in ranges:
+    count = 0
+    for rock in arr:
+        if low <= rock <= high:
+            count += 1
+    print(count)
+'''
+###########
+N, K = map(int, input().split(","))
+
+factors = []
+for i in range(1, int(N**0.5) + 1):
+    if N % i == 0:
+        factors.append(i)
+        if i != N // i:
+            factors.append(N // i)
+factors.sort()
+if K > len(factors):
+    print(1)
+else:
+    print(factors[len(factors) - K])
+
+
+
+
+
+
+
+
+
+
