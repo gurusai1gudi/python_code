@@ -4596,6 +4596,7 @@ for low, high in ranges:
     print(count)
 '''
 ###########
+'''
 N, K = map(int, input().split(","))
 
 factors = []
@@ -4609,6 +4610,138 @@ if K > len(factors):
     print(1)
 else:
     print(factors[len(factors) - K])
+'''
+#move zeros to end
+'''
+N = int(input())
+arr = list(map(int, input().split()))
+i=0
+for j in range(len(arr)):
+    if arr[j]==0:
+        continue
+    elif arr[j]>=0:
+        arr[i],arr[j]=arr[j],arr[i]
+        i+=1
+    else:
+        print("0")
+print(arr)
+'''
+#########
+'''
+arr=list(map(int, input().split()))
+target=int(input())
+left=0
+right=len(arr)-1
+while left<=right:
+    sum_target=arr[left]+arr[right]
+    if sum_target==target:
+        print(True)
+        print((arr[left],arr[right]))
+        break
+    elif sum_target<target:
+        left+=1
+    else:
+        right-=1
+'''
+#
+'''
+arr="abcabcbb"
+substrings=[]
+new_sub=[]
+def duplicate(sub):
+    new = []
+    for char in sub:
+        if char in new:
+            return False
+        new.append(char)
+    return True
+
+for i in range(len(arr)):
+    for j in range(i,len(arr)):
+        substrings.append(arr[i:j+1])
+for sub in substrings:
+    if duplicate(sub)==True:
+        new_sub.append(sub)
+max_len=0
+longest=""
+for sub in new_sub:
+    if len(sub)>max_len:
+        max_len = len(sub)
+        longest = sub
+print(max_len)
+print(longest)
+'''
+#candies smallest
+'''
+arr = [1, 2, 3, 4]
+total_sum = 0
+
+while len(arr) > 1:
+    arr.sort()
+    first_min, second_min = arr[0], arr[1]
+    sum_value = first_min + second_min
+    arr.remove(first_min)
+    arr.remove(second_min)
+    arr.insert(0,sum_value)
+    total_sum += sum_value
+
+print(total_sum)
+'''
+#freesquares
+'''
+import math
+N=int(input())
+count=0
+for i  in range(2,N+1):
+    is_sq = True
+    for j in range(2,int(math.sqrt(i)) + 1):
+        if i % (j * j)==0:
+            is_sq=False
+            break
+    if is_sq and N%i==0:
+        count+=1
+        print(i)
+print(count)
+'''
+# sldiing window problem-dynamic
+'''
+def longest_subarray(arr,k):
+    start=0
+    window_sum=0
+    max_length=0
+    for end in range(len(arr)):
+        window_sum+=arr[end]
+        while window_sum>=k:
+            window_sum-=arr[start]
+            start+=1
+        length=end-start+1
+        if length>max_length:
+            max_length=length
+    return max_length
+print(longest_subarray([30,40,50,20,20,10,90,10,10,10],100))
+'''
+#sliding window static
+def substring(arr,k):
+    start=0
+    end=k
+    window_sum=0
+    max_sum=0
+    for end in range(len(arr)):
+        window_sum+=arr[end]
+        if end>k-1:
+            window_sum-=arr[start]
+            start+=1
+            if window_sum>max_sum:
+                max_sum=window_sum
+    return max_sum
+print(substring([2,1,5,1,3,2],3))
+
+
+
+
+
+
+
 
 
 
