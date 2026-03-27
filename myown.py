@@ -6,14 +6,17 @@ num2=5
 print(sum_addition(num1,num2))
 '''
 from typing import List
-
+'''
 from django.contrib.sitemaps.views import index
 from django.core.files import temp
 from numpy._core.strings import upper
+from scipy.signal import max_len_seq
 from sklearn.covariance import ledoit_wolf
+from streamlit import title
+from sympy import false
 from sympy.codegen.cnodes import sizeof
 from tenacity import wait_exponential_jitter
-
+'''
 '''
 def int_to_str(num):
     return str(num)
@@ -4721,6 +4724,7 @@ def longest_subarray(arr,k):
 print(longest_subarray([30,40,50,20,20,10,90,10,10,10],100))
 '''
 #sliding window static
+'''
 def substring(arr,k):
     start=0
     end=k
@@ -4735,20 +4739,675 @@ def substring(arr,k):
                 max_sum=window_sum
     return max_sum
 print(substring([2,1,5,1,3,2],3))
+'''
+#####
+'''
+str1=input()
+str2=input()
+for char in str1:
+    if char in str2:
+        str1=str1.replace(char,"")
+print(str1)
+'''
+#################
+'''
+def convert_to_binary(n):
+    binary_value=[]
+    while n>0:
+        remainder=n%2
+        binary_value.append(remainder)
+        n=n//2
+    reversed=binary_value[::-1]
+    return reversed
+def count_iterations(n,k):
+    count=0
+    for i in range(len(n)):
+        if n[i]==1 and k[i]==0:
+            n[i]=0
+            count+=1
+    return count,n
+N=int(input())
+K=int(input())
+n=convert_to_binary(N)
+k=convert_to_binary(K)
+print(count_iterations(n,k))
+'''
+######
+'''
+s=input()
+start=0
+window=""
+max_window=0
+seen=[]
+for end in s:
+    if end not in seen:
+        seen.append(end)
+        window += end
+    else:
+        while end in seen:
+            removed=seen.pop(0)
+            window=window[1:]
+        seen.append(end)
+        window+=end
+    if len(window)>max_window:
+        max_window=len(window)
+print(max_window)
+'''
+#####
+'''
+nums=[2,3,1,1,4]
+end=len(nums)-1
+count=0
+sum_length=nums[0]
+length=0
+for i in range(1,len(nums)):
+    sum_length+=nums[i]
+    if sum_length>nums[end]:
+        sum_length-=nums[i]
+        continue
+    elif sum_length<nums[end]:
+        count+=1
+    elif sum_length==nums[end]:
+        print(count)
+'''
+#############
+'''
+nums = [2,3,1,1,4]
+
+n = len(nums)
+i = 0
+jump = 0
+
+while i < n - 1:
+
+    start = nums[i]
+    best_reach = 0
+    best_index = i
+
+    for j in range(1, start + 1):
+
+        new_position = i + j
+
+        if new_position >= n - 1:
+            jump += 1
+            print(jump)
+            exit()
+
+        if new_position + nums[new_position] > best_reach:
+            best_reach = new_position + nums[new_position]
+            best_index = new_position
+
+    i = best_index
+    jump += 1
+'''
+#left decrease
+'''
+n=int(input())
+for i in range(n):
+    for j in range(n-i):
+        print("*",end="")
+    print()
+'''
+#right decrease triangle
+'''
+n=int(input())
+for i in range(n):
+    for s in range(i):
+        print(" ",end="")
+    for  j in range(n-i):
+        print("*",end="")
+    print()
+'''
+#leftindreasing
+'''
+n=int(input())
+for i in range(n):
+    for j in range(i+1):
+        print("*",end="")
+    print()
+'''
+#right increasing triangle
+'''
+n=int(input())
+for i in range(n+1):
+    for s in range(n-i):
+        print(" ",end="")
+    for j in range(i):
+        print("*",end="")
+    print()
+'''
+####uphill
+'''
+n = int(input())
+for i in range(n):
+    for s  in range(n-i-1):
+        print(" ",end="")
+    for j in range(2*i+1):
+        print("*",end="")
+    print()
+for i in range(n-1):
+    for s in range(i+1):
+        print(" ",end="")
+    for j in range(2*(n-i-1)-1):
+        print("*",end="")
+    print()
+'''
+####sandtimer
+'''
+n=int(input())
+for i in range(n):
+    for s in range(i+1):
+        print(" ",end="")
+    for j in range(2*(n-i)-1):
+        print("*",end="")
+    print()
+for i in range(n-1):
+    for  s in range(n-i-1):
+        print(" ",end="")
+    for  j in range(2*(i+1)+1):
+        print("*",end="")
+    print()
+'''
+########rightpointed triangle
+'''
+n=int(input())
+for i in range(n):
+    for j in range(i+1):
+        print("*",end="")
+    print()
+for i in range(n-1):
+    for j in range(n-i-1):
+        print("*",end="")
+    print()
+'''
+#leftpointed triangle
+'''
+n=int(input())
+for i in range(n+1):
+    for s in range(n-i):
+        print(" ",end="")
+    for j in range(i):
+        print("*",end="")
+    print()
+for i in range(n-1):
+    for s in range(i+1):
+        print(" ",end="")
+    for j in range(n-i-1):
+        print("*",end="")
+    print()
+'''
+#butterflypatten
+'''
+n=int(input())
+for i in range(1,n+1):
+    for j in range(i):
+        print("*",end="")
+    for s in range(2*(n-i)):
+        print(" ",end="")
+    for j in range(i):
+        print("*",end="")
+    print()
+for i in range(n-1):
+    for j in range(n-i-1):
+        print("*",end="")
+    for s in range(2*(i+1)):
+        print(" ",end="")
+    for j in range(n-i-1):
+        print("*",end="")
+    print()
+'''
+#### merge_alternatively
+'''
+word1="abc"
+word2="pqr"
+merged_result=""
+n1=len(word1)
+n2=len(word2)
+max_result=max(n1,n2)
+for i in range(max_result):
+    if i < n1:
+        merged_result += word1[i]
+
+    if i < n2:
+        merged_result += word2[i]
+print(merged_result)
+'''
+#buddy strings
+'''
+s = "ab"
+goal = "ba"
+s_list = list(s)
+for i in range(len(s_list)):
+    for j in range(len(s_list)):
+        if i != j:
+            s_list[i], s_list[j] = s_list[j], s_list[i]
+            if "".join(s_list) == goal:
+                print("true")
+            else:
+                print("false")
+
+            s_list[i], s_list[j] = s_list[j], s_list[i]
+'''
+############
+''''
+def three_sum(nums):
+    nums.sort()
+    result=[]
+    for i in range(len(nums)-2):
+        if i>0 and nums[i]==nums[i-1]:
+            continue
+        left,right=i+1,len(nums)-1
+        while left<right:
+            total=nums[i]+nums[left]+nums[right]
+            if total<0:
+                left+=1
+            elif total>0:
+                right-=1
+            else:
+                result.append([nums[i],nums[left],nums[right]])
+                while left<right and nums[left]==nums[left]+1:
+                    left+=1
+                while left<right and nums[right]==nums[right]-1:
+                    right-=1
+                left+=1
+                right-=1
+    return result
+print(three_sum([-1,0,1,2,-1,-4]))
+'''
+#minimum in rotated sorted_array
+'''
+def find_min(arr):
+    left=0
+    right=len(arr)-1
+    while left<right:
+        mid=(left+right)//2
+        if arr[mid]>arr[right]:
+            left=mid+1
+        else:
+            right=mid
+    return arr[left]
+
+print(find_min(arr=[4,5,6,7,0,1,2]))
+'''
+#trailing zeros
+'''
+n=int(input())
+sum_val=0
+multi=5
+while multi<n:
+    sum_val+=n//multi
+    multi=multi*5
+print(sum_val)
+'''
+#max_subarray
+'''
+arr=[-2,1,-3,4,-1,2,1,-5,4]
+max_sub=0
+for i in range(len(arr)):
+    for j in range(len(arr)):
+        sub=arr[i:j+1]
+        if sum(sub)>max_sub:
+            max_sub=sum(sub)
+print(max_sub)
+'''
+# first non repeating in array
+'''
+arr=[-1,2,-1,3,0]
+unique_ones={}
+for i in range(len(arr)):
+    unique_ones[arr[i]]=arr.count(arr[i])
+for key,values in unique_ones.items():
+    if values==1:
+        print(key)
+        break
+'''
+#rotate by d positions
+''''
+arr=[1,2,3,4,5,6]
+d=2
+for i in range(d):
+    new=arr.pop(0)
+    arr.append(new)
+print(arr)
+'''
+'''
+arr = [1, 2, 0, 3]
+left = 0
+right = len(arr) - 1
+left_sum = arr[left]
+right_sum = arr[right]
+
+for end in range(1, len(arr)):
+    if left_sum == right_sum and left + 1 == right - 1:
+        print("Equilibrium index:", left + 1)
+    elif left_sum < right_sum:
+        left += 1
+        left_sum += arr[left]
+    else:
+        right -= 1
+        right_sum += arr[right]
+'''
+#clockwisektimesrotatw
+'''
+arr=[1,2,3,4,5,6]
+k=2
+for i in range(k):
+    new=arr.pop(-1)
+    arr.insert(0,new)
+print(arr)
+'''
+#######
+'''
+a=[[1,2],[3,4]]
+b=[[4,3],[2,1]]
+c=[]
+sum_val=0
+for i in range(len(a)):
+    row=[]
+    for j in range(len(a[0])):
+        sum_val=a[i][j]+b[i][j]
+        row.append(sum_val)
+    c.append(row)
+print(c)
+'''
+#college problem
+'''
+def min_cost_hiring(q,w,k):
+    accepted=[]
+    for i in range(len(q)):
+        ratio=w[i]/q[i]
+        for  j in range(len(q)):
+            if q[i]*ratio>=w[j]:
+                accepted.append(q[j]*ratio)
+        if len(accepted)>=k:
+            accepted.sort()
+            return sum(accepted[:k])
+print(min_cost_hiring([3,1,10,10,1],[4,8,2,2,7],3))
+'''
+#########
+'''
+def kth_smallest(arr, k):
+    pivot = arr[0]
+
+    left = []
+    right = []
+
+    for x in arr[1:]:
+        if x < pivot:
+            left.append(x)
+        else:
+            right.append(x)
+
+    rank = len(left) + 1
+
+    if k == rank:
+        return pivot
+    elif k < rank:
+        return kth_smallest(left, k)
+    else:
+        return kth_smallest(right, k - rank)
 
 
+arr = [20,14,12,1]
+k = 2
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print(kth_smallest(arr, k))
+'''
+#bitflips
+'''
+def bits_conversion(number):
+    nam=[]
+    while number>0:
+        rem=number%2
+        nam.append(rem)
+        number=number//2
+    nam.reverse()
+    return nam
+def flips_required(one,two):
+    count=0
+    for i in range(len(one)):
+        if one[i]!=two[i]:
+            count+=1
+    return count
+start=10
+goal=7
+madhava=bits_conversion(start)
+kesava=bits_conversion(goal)
+while len(madhava)<len(kesava):
+    madhava.insert(0,0)
+while len(kesava)<len(madhava):
+    kesava.insert(0,0)
+print(flips_required(madhava,kesava))
+'''
+#####max of each window
+'''
+arr=[1, 3, -1 ,-3 ,5 ,3 ,6 ,7]
+k=3
+list_new=[]
+left=0
+right=k
+i=0
+while right<=len(arr):
+    window=arr[left:right]
+    final=max(window)
+    list_new.append(final)
+    left+=1
+    right+=1
+print(list_new)
+'''
+#printing sliding window
+'''
+s="abcabcbb"
+left=0
+right=1
+Max_len=0
+ans=""
+while right<=len(s):
+    substring=s[left:right]
+    if s[right-1] not in substring[:-1]:
+        print(substring)
+        if len(substring)>Max_len:
+            Max_len=len(substring)
+            ans=substring
+        right+=1
+    else:
+        left+=1
+print(ans)
+'''
+##### arranging with the rank
+'''
+arr=[100,5,70,2]
+rank_arrangement={}
+new=sorted(arr)
+for i in range(len(new)):
+    rank_arrangement[new[i]]=i+1
+for i in range(len(arr)):
+    if arr[i] in rank_arrangement:
+        print(rank_arrangement[arr[i]])
+'''
+## highest_frequency_comes_first
+''''
+arr = [5, 5, 4, 6, 4]
+freq_count={}
+for char in arr:
+    if char not in freq_count:
+        freq_count[char]=1
+    else:
+        freq_count[char]+=1
+final_keys = []
+while len(freq_count)>=1:
+    highest_freq=max(freq_count.values())
+    keys_to_remove=[]
+    smallest_key = float('inf')
+    for key,values in freq_count.items():
+        if values==highest_freq:
+            if key<smallest_key:
+                smallest_key = key
+    for i in range(highest_freq):
+        final_keys.append(smallest_key)
+    keys_to_remove.append(smallest_key)
+    for k in keys_to_remove:
+        freq_count.pop(k)
+print(final_keys)
+'''
+####
+'''
+arr1=[2,1,2,3,4]
+arr2=[2,1,2]
+final_arr2=[]
+last_final=[]
+for i in range(len(arr2)):
+    if arr2[i] not  in final_arr2:
+        final_arr2.append(arr2[i])
+count_set={}
+for i in range(len(arr1)):
+    if arr1[i] not in count_set:
+        count_set[arr1[i]]=1
+    else:
+        count_set[arr1[i]]+=1
+for char in final_arr2:
+    if char in count_set:
+        for i in range(count_set[char]):
+            last_final.append(char)
+            arr1.remove(char)
+last_final.extend(arr1)
+print(last_final)
+'''
+#######maximum product subarray
+'''
+arr = [-2,6,-3,-10,0,2]
+left=0
+subarray=[]
+while left<len(arr):
+    right=left+1
+    while right<=len(arr):
+        subarray.append(arr[left:right])
+        right+=1
+    left+=1
+highest_mul=1
+for i in range(len(subarray)):
+    multiple=1
+    for j in range(len(subarray[i])):
+        multiple*=subarray[i][j]
+    if multiple>highest_mul:
+        highest_mul=multiple
+print(highest_mul)
+'''
+#profit hoga mere baat suno
+'''
+prices=[1,3,6,9,11]
+max_profit=0
+for i in range(len(prices)):
+    buy=prices[i]
+    for j in range(i+1,len(prices)):
+        sell=prices[j]
+        profit=sell-buy
+        if profit > max_profit:
+            max_profit=profit
+print(max_profit)
+'''
+#consecutiveonesorzeros
+'''
+arr=[0,1,0,1,1,1,1]
+one_count=0
+zero_count=0
+for i in range(len(arr)):
+    if arr[i]==0:
+        zero_count+=1
+    else:
+        zero_count=0
+    if arr[i]==1:
+        one_count+=1
+    else:
+        one_count=0
+if zero_count>one_count:
+    print(zero_count)
+else:
+    print(one_count)
+'''
+#min duration plans tcs given problem
+'''
+n=9
+plans={3:5000,6:9000,9:12000,12:15000}
+min_cost=float('inf')
+for plan in plans:
+    remaining_cost=n
+    cost=0
+    i=plan
+    while remaining_cost>0:
+        if remaining_cost>=i:
+            remaining_cost-=i
+            cost+=plans[i]
+        else:
+            break
+    if remaining_cost==0:
+        min_cost=min(min_cost,cost)
+if n in plans:
+    min_cost=min(min_cost,plans[n])
+print(min_cost)
+'''
+###### small library management system
+'''
+library = []
+def add():
+    no_of_books = int(input("Enter number of books: "))
+    for i in range(no_of_books):
+        name = input("Enter book name: ")
+        title = input("Enter book title: ")
+        library.append({
+            "name": name,
+            "title": title,
+            "issued": False
+        })
+    print("Books added successfully!")
+def view():
+    if not library:
+        print("no books available")
+        return
+    print("\navailable books:")
+    for book in library:
+        if book["issued"]==True:
+            status="Issued"
+        else:
+            status="available"
+            print(f"{book['name']} ({book['title']}) - {status}")
+def issue():
+    issued_book_name=input("enter the book name to issue")
+    for book_name in library:
+        if book_name["name"]==issued_book_name:
+            if book_name["issued"]==True:
+                print("book already issued")
+            else:
+                book_name["issued"]=True
+                print("book issued succesfully")
+            return
+    print("book not found")
+def return_book():
+    returned_book_name=input("enter the book name to return:")
+    for book_name in library:
+        if book_name["name"]==returned_book_name:
+            if not book_name["issued"]:
+                print("Book was not issued ")
+            else:
+                book_name["issued"]=False
+                print("Book returned successfully")
+            return
+    print("book not found")
+while True:
+    print("\n1. Add Books")
+    print("2. View Books")
+    print("3. Issue Books")
+    print("4. Return Books")
+    print("5. Exit")
+    choice=int(input("Enter your choice: "))
+    if choice==1:
+        add()
+    elif choice==2:
+        view()
+    elif choice==3:
+        issue()
+    elif choice==4:
+        return_book()
+    else:
+        exit()
+'''
