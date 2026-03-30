@@ -5411,3 +5411,48 @@ while True:
     else:
         exit()
 '''
+#sorting the array
+'''
+arr=[1,3,2,4]
+k=2
+new=arr.sort()
+for i in range(len(arr)):
+    if i==k:
+        print(arr[i])
+'''
+# something operation
+'''
+arr=[1,0,1,1,1]
+flip_count=0
+for i in range(len(arr)):
+    if arr[i]==0:
+        flip_count+=1
+        for j in range(i,len(arr)):
+            if arr[j]==0:
+                arr[j]=1
+            else:
+                arr[j]=0
+print(flip_count)
+'''
+#optimal way
+'''
+arr = [1, 0, 1, 1, 1]
+
+flipped = False
+count = 0
+
+for i in range(len(arr)):
+    value = arr[i]
+
+    if flipped:
+        if value == 0:
+            value = 1
+        else:
+            value = 0
+
+    if value == 0:
+        count += 1
+        flipped = not flipped
+
+print(count)
+'''
