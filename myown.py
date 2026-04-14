@@ -6,6 +6,9 @@ num2=5
 print(sum_addition(num1,num2))
 '''
 from typing import List
+
+from torch.utils.data.datapipes.dataframe.dataframe_wrapper import get_len
+
 '''
 from django.contrib.sitemaps.views import index
 from django.core.files import temp
@@ -4922,19 +4925,7 @@ for i in range(n-1):
 '''
 #leftpointed triangle
 '''
-n=int(input())
-for i in range(n+1):
-    for s in range(n-i):
-        print(" ",end="")
-    for j in range(i):
-        print("*",end="")
-    print()
-for i in range(n-1):
-    for s in range(i+1):
-        print(" ",end="")
-    for j in range(n-i-1):
-        print("*",end="")
-    print()
+
 '''
 #butterflypatten
 '''
@@ -5456,3 +5447,616 @@ for i in range(len(arr)):
 
 print(count)
 '''
+#minjumpsrequired
+''''
+arr = [1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9]
+count=0
+i=0
+n=len(arr)
+while i<n-1:
+    max_count=0
+    next_index=i
+    for j in range(i+1,min(i+arr[i]+1,n)):
+        next_element=j+arr[j]
+        if next_element>max_count:
+            max_count=next_element
+            next_index=j
+    i=next_index
+    count+=1
+print(count)
+'''
+#selection sort
+'''
+arr=[4, 1, 3, 9, 7]
+for i in range(len(arr)):
+    min_index=i
+    for j in range(i+1,len(arr)):
+        if arr[j]<arr[min_index]:
+            min_index=j
+    arr[i],arr[min_index]=arr[min_index],arr[i]
+print(arr)
+'''
+#####patternlast
+'''
+n=5
+for i in range(n):
+    for j in range(i):
+        print("*",end="")
+    for k in range(2*(n-i-1)):
+        print(" ",end="")
+    for r in range(i):
+        print("*",end="")
+    print()
+for i in range(n):
+    for j in range(n-i-2):
+        print("*",end="")
+    for k in range(2*(i+1)):
+        print(" ",end="")
+    for r in range(n-i-2):
+        print("*",end="")
+    print()
+'''
+#check whether a string is palindrome
+'''
+string="madam"
+palindrome=False
+n=len(string)
+for i in range(n):
+    if string[i]==string[n-i-1]:
+        palindrome=True
+    else:
+        palindrome=False
+print(palindrome)
+'''
+## remove vowels  in a string
+'''
+vowels="what is your name ?"
+new=vowels
+for i in range(len(vowels)):
+    if vowels[i] in "aeiou":
+        new=new.replace(vowels[i]," ")
+print(new)
+'''
+##remove spaces fromthe givenstrig
+'''
+s= "g  eeks   for ge  eeks  "
+new=""
+for char in s:
+    if char!=" ":
+        new+=char
+print(new)
+'''
+#
+'''
+string1 = "computer"
+string2 = "cat"
+new=""
+for char in string1:
+    if char not in string2:
+        new+=char
+print(new)
+'''
+##
+'''
+S="$Gee*k;s..fo, r'Ge^eks?"
+new=""
+for char in S:
+    if char.isalpha():
+        new+=char
+print(new)
+'''
+#
+'''
+s="skeeG"
+n=len(s)
+new_s=""
+for i in range(n):
+    new_s+=s[n-i-1]
+print(new_s)
+'''
+##
+'''
+s="1abc23"
+sum_num=0
+for char in s:
+    if char.isnumeric():
+        sum_num+=int(char)
+print(sum_num)
+'''
+#
+'''
+s = "geeksforgeeks"
+dict_count={}
+for char in s:
+    if char not in dict_count:
+        dict_count[char]=1
+    else:
+        dict_count[char]+=1
+for char,values in dict_count.items():
+    print(f"{char}{values}",end=" ")
+'''
+##########
+'''
+s = "geeksforgeeks"
+new_dict={}
+max_val=0
+max_char=""
+for char in s:
+    if char not in new_dict:
+        new_dict[char]=1
+    else:
+        new_dict[char]+=1
+for char,values in new_dict.items():
+    if values>max_val:
+        max_val=values
+        max_char=char
+print(f'{max_char}{max_val}')
+'''
+#first non repeating characters in a string
+'''
+s = "geeksforgeeks"
+boolean_dict={}
+first_non_repeat=""
+for char in s:
+    if char not in boolean_dict:
+        boolean_dict[char]=1
+    else:
+        boolean_dict[char]+=1
+for char,values in boolean_dict.items():
+    if values==1:
+        first_non_repeat=char
+        break
+print(first_non_repeat)
+'''
+####
+'''
+s="This is a test string"
+words = s.split()
+min_length_word = float('inf')
+max_length_word = 0
+for word in words:
+    length = len(word)
+    if length > max_length_word:
+        max_length_word = length
+    if length < min_length_word:
+        min_length_word = length
+print(min_length_word, max_length_word)
+'''
+#### strings are anagrams of each other
+'''
+s1 ="geeks"
+s2 ="kseeg"
+anagrams=False
+if len(s1)==len(s2):
+    for char in s1:
+        if char in s2:
+            anagrams=True
+        else:
+            anagrams=False
+print(anagrams)
+'''
+#######sort the string of characters
+''''
+s = "dcab"
+s = list(s)
+for i in range(len(s) - 1):
+    for j in range(len(s)-1):
+        if s[j]>s[j+1]:
+            s[j],s[j+1]=s[j+1],s[j]
+new="".join(s)
+print(new)
+'''
+#convert into opposite case
+'''
+s = "geeksForgEeks"
+for char in s:
+    if char.isupper():
+        s=s.replace(char,char.lower())
+    else:
+        s=s.replace(char,char.upper())
+print(s)
+'''
+####
+'''
+s= "abc\\p\""
+count=0
+for i in range(len(s)):
+    if s[i]!=' 'and s[i]!='\t' and s[i]!='\n':
+        if i==0 or s[i-1]==" "or s[i-1] == '\t' or s[i-1] == '\n':
+                count += 1
+print(count)
+'''
+#remove duplicates in string
+'''
+s = "geeksforgeeks"
+seen=[]
+for char in s:
+    if char not in seen:
+        seen.append(char)
+    else:
+        s=s.replace(char,"")
+print(*seen,end="")
+'''
+#######
+'''
+txt = "geeksforgeeks"
+pat="eks"
+left = 0
+finded=False
+while left < len(txt):
+    right = left + 1
+
+    while right < len(txt):
+
+        if txt[left] == txt[right]:
+            left += 1
+            break  # restart with new left
+
+        sub = txt[left:right + 1]
+        if sub==pat:
+            finded=True
+
+        right += 1
+
+    else:
+        left += 1
+print(finded)
+'''
+####revreser the word in a  string
+'''
+s = "i.like.this.program.very.much"
+word=s.split(".")
+ram=word[::-1]
+new=".".join(ram)
+print(new)
+'''
+####count common subsequencesin given string
+'''
+def substrings(s):
+    sub = []
+    left = 0
+    while left < len(s):
+        right = left + 1
+        while right < len(s):
+            if s[left] == s[right]:
+                left += 1
+                break
+            sub.append(s[left:right+1])
+            right += 1
+        else:
+            left += 1
+    return sub
+S = "ajblqcpdz"
+T = "aefcnbtdi"
+sub_S = substrings(S)
+sub_T = substrings(T)
+common = []
+for i in range(len(sub_S)):
+    for j in range(len(sub_T)):
+        if sub_S[i] == sub_T[j]:
+            common.append(sub_S[i])
+print("Common substrings:", common)
+'''
+###selection sort job scheduling with priority=3
+'''
+n=int(input())
+priority=3
+jobs={}
+new=[]
+for i in range(n):
+    a,b=map(int,input().split())
+    jobs[a]=b
+for key,values in jobs.items():
+    if values==priority:
+        new.append(key)
+def selection_sort(value):
+    for i in range(len(value)):
+        min_index = i
+        for j in range(i+1,len(value)):
+            if value[j]<value[min_index]:
+                min_index = j
+        value[i],value[min_index] = value[min_index],value[i]
+selection_sort(new)
+print(*new)
+'''
+###
+'''
+n=int(input())
+input_map=[]
+for i in range(n):
+    input_map.append(int(input()))
+for j in range(len(input_map)):
+    if input_map[j]<=0:
+        input_map[j]=5
+    print(input_map[j])
+print(input_map)
+'''
+#gcd of two  numbers
+'''
+a = int(input())
+b = int(input())
+
+a_factors = []
+b_factors = []
+max_factor = 0
+for i in range(1, a+1):
+    if a % i == 0:
+        a_factors.append(i)
+for i in range(1, b+1):
+    if b % i == 0:
+        b_factors.append(i)
+for i in a_factors:
+    if i in b_factors and i > max_factor:
+        max_factor = i
+
+print( max_factor)
+'''
+##sales_data_by_month
+'''
+data=[{"month":"Jan","sales":100},{"month":"Feb","sales":150},{"month":"Mar","sales":120},{"month":"Apr","sales":180}]
+prev_month=None
+prev_sales=None
+for item in data:
+    current_month=item["month"]
+    current_sales=item["sales"]
+    if prev_sales is not None and current_sales > prev_sales:
+        print(f"{current_month}->{prev_month}:{current_sales}>{prev_sales}")
+    prev_month=current_month
+    prev_sales=current_sales
+'''
+######lcm of two numbers
+'''
+a = int(input())
+b = int(input())
+a_factors = []
+b_factors = []
+for i in range(1, a + 1):
+    if a % i == 0:
+        a_factors.append(i)
+for j in range(1, b + 1):
+    if b % j == 0:
+        b_factors.append(j)
+common = []
+for x in a_factors:
+    if x in b_factors:
+        common.append(x)
+gcd = max(common)
+lcm = (a * b) // gcd
+print(a_factors)
+print(b_factors)
+print("LCM:", lcm)
+'''
+####
+'''
+def fibonacci(n):
+    if n==0:
+        return 0
+    if n==1:
+        return 1
+    return fibonacci(n-1)+fibonacci(n-2)
+a=int(input())
+print(fibonacci(a))
+'''
+###### minimum rotations needed to convert arr1 to arr2
+'''
+arr1=[1,2,3,4,5]
+arr2=[3,4,5,1,2]
+count=0
+while arr1!=arr2:
+    first=arr2.pop(0)
+    arr2.append(first)
+    count+=1
+if arr1==arr2:
+    print(count)
+else:
+    print(-1)
+'''
+#####maximum product of contigous subarray
+'''
+arr = [2, 3, -2, 4]
+max_product=float('-inf')
+max_product_subarray=[]
+left = 0
+while left < len(arr):
+    right = left + 1
+    while right < len(arr):
+        if arr[right] != arr[left]:
+            subarray_at = arr[left:right + 1]
+            product=1
+            for char in subarray_at:
+                product*=char
+            if product >max_product:
+                max_product=product
+                max_product_subarray=subarray_at
+        right += 1
+    left += 1
+print(max_product)
+print(max_product_subarray)
+'''
+#given tickets
+'''
+inp=[10,15,20,25,30]
+count_odd_prices=0
+sum_odd_prices=0
+final_odd=[]
+average_odd_prices=0
+for i in range(len(inp)):
+    if inp[i] % 2!= 0:
+        count_odd_prices += 1
+        sum_odd_prices += inp[i]
+        final_odd.append(inp[i])
+average_odd_prices=sum(final_odd)//len(final_odd)
+print(f'{'count='}{count_odd_prices} {'sum='}{sum_odd_prices}')
+'''
+#next_permuatation
+'''
+permutation = [1, 2, 3]
+n = 1
+for i in range(1, len(permutation) + 1):
+    n *= i
+i = 0
+while i < n:
+
+    pivot = -1
+    next_greater = float('inf')
+    next_index = -1
+
+    # find pivot
+    for k in range(len(permutation) - 2, -1, -1):
+        if permutation[k] < permutation[k + 1]:
+            pivot = k
+            break
+
+    if pivot != -1:
+        # find next greater
+        for j in range(pivot + 1, len(permutation)):
+            if permutation[j] > permutation[pivot] and permutation[j] < next_greater:
+                next_greater = permutation[j]
+                next_index = j
+
+        # swap (OUTSIDE loop)
+        permutation[pivot], permutation[next_index] = permutation[next_index], permutation[pivot]
+
+    else:
+        permutation.reverse()
+
+    # reverse right side
+    left = pivot + 1
+    right = len(permutation) - 1
+
+    while left < right:
+        permutation[left], permutation[right] = permutation[right], permutation[left]
+        left += 1
+        right -= 1
+
+    print(permutation)
+
+    i += 1
+'''
+####some problem
+'''
+N=int(input())
+sum_final=0
+while N!=0:
+    rem = N % 10
+    fact = 1
+    for i in range(1,rem+1):
+        fact *= i
+    sum_final+=fact
+    N=N//10
+print(sum_final)
+'''
+#circular linked list
+'''
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next=None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def insert_at_beginning(self,data):
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+    def insert_at_end(self,data):
+        new_node=Node(data)
+        current=self.head
+        while current:
+            current=current.next
+        current.next=new_node
+        new_node.next=None
+    def get_length(self):
+        count=0
+        current=self.head
+        while current:
+            count+=1
+            current=current.next
+        return count
+    def insert_at_middle(self,data):
+        new_node=Node(data)
+        n=self.get_length()
+        mid=n//2
+        current=self.head
+        count = 0
+        while count<mid-1:
+            current=current.next
+        new_node.next=current.next
+        current.next=new_node
+'''
+#### insertion sort
+'''
+arr = [4, 1, 3, 9, 7]
+i=0
+for j in range(i+1,len(arr)):
+    i=j-1
+    while i>=0 and arr[i]>arr[i+1]:
+        arr[i],arr[i+1]=arr[i+1],arr[i]
+        i=i-1
+print(arr)
+'''
+#quick sort technique
+'''
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot = arr[-1]
+    left = []
+    right = []
+
+    for i in range(len(arr) - 1):
+        if arr[i] < pivot:
+            left.append(arr[i])
+        else:
+            right.append(arr[i])
+
+    return quick_sort(left) + [pivot] + quick_sort(right)
+print(quick_sort([4,1,3,7,9]))
+'''
+#train problem greedy approach
+'''
+arr = [900, 940, 950, 1100, 1500, 1800]
+dep = [910, 1200, 1120, 1130, 1900, 2000]
+arr.sort()
+dep.sort()
+i = 0
+j = 0
+count = 0
+max_count = 0
+while i<len(arr) and j<len(dep):
+    if arr[i]<=dep[j]:
+        count+=1
+        i+=1
+    else:
+        count-=1
+        j+=1
+    max_count=max(count,max_count)
+print(max_count)
+'''
+#merge sort
+def merge_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+    left = merge_sort(left)
+    right = merge_sort(right)
+    return merge(left, right)
+def merge(left, right):
+    result = []
+    i = j = 0
+    while i < len(left) and j < len(right):
+        if left[i] < right[j]:
+            result.append(left[i])
+            i += 1
+        else:
+            result.append(right[j])
+            j += 1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+to_be_sorted=[56,72,90,12,44,32,11]
+ram=merge_sort(to_be_sorted)
+print(ram)
