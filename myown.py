@@ -6034,7 +6034,8 @@ while i<len(arr) and j<len(dep):
     max_count=max(count,max_count)
 print(max_count)
 '''
-#merge sort
+#########################################
+'''
 def merge_sort(arr):
     if len(arr) <= 1:
         return arr
@@ -6058,5 +6059,1642 @@ def merge(left, right):
     result.extend(right[j:])
     return result
 to_be_sorted=[56,72,90,12,44,32,11]
-ram=merge_sort(to_be_sorted)
-print(ram)
+final=merge_sort(to_be_sorted)
+print(final)
+'''
+####toatal parking cost
+'''
+n=int(input())
+cost=0
+for i in range(1,n+1):
+    if i<=2:
+        cost+=100
+    elif i<=5:
+        cost+=50
+    else:
+        cost+=20
+print(cost)
+'''
+# sum  of largest subarray
+'''
+arr=[2,3,4,1,5]
+left=0
+max_subarray_sum=0
+subarray=[]
+while left<len(arr):
+    right=left+1
+    while right<len(arr):
+        if arr[right]!=arr[left]:
+            sub_array=arr[left:right+1]
+            if sum(sub_array)>max_subarray_sum:
+                max_subarray_sum=sum(sub_array)
+                subarray=sub_array
+        right+=1
+    left+=1
+print(max_subarray_sum)
+print(subarray)
+'''
+#####tcs  nqt question
+'''
+arr=list(map(int,input().split()))
+max_count=0
+result=arr[0]
+for i in range(len(arr)):
+    count=0
+    for j in range(len(arr)):
+        if arr[i]==arr[j]:
+            count+=1
+        if count>max_count:
+            max_count=count
+            result=arr[i]
+        elif count==max_count:
+            if  arr[i]<result:
+                result=arr[i]
+print(result)
+'''
+### finding the first and last postion in sorted arr
+'''
+nums=[5,7,7,8,8,10]
+target=8
+first_index=-1
+last_index=-1
+for i in range(len(nums)):
+    if nums[i]==target:
+        first_index=i
+        break
+if  first_index!=-1:
+    for j in range(first_index,len(nums)):
+        if nums[j]==target:
+            last_index=j
+        else:
+            break
+print([first_index,last_index])
+'''
+######## group anagrams
+''''
+strs = ["eat","tea","tan","ate","nat","bat"]
+groups={}
+for word in strs:
+    key="".join(sorted(word))
+    if key in groups:
+        groups[key].append(word)
+    else:
+        groups[key]=[word]
+final=list(groups.values())
+print(final)
+'''
+#all sorting techniques for tcs
+#bubble sort
+'''
+arr=[5,4,3,2,1]
+for i in range(len(arr)):
+    for j in range(len(arr)-i-1):
+        if arr[j]>arr[j+1]:
+            arr[j],arr[j+1]=arr[j+1],arr[j]
+print(arr)
+'''
+#selection sort
+'''
+arr=[5,4,3,2,1]
+for i in range(len(arr)):
+    min_index=i
+    for j in range(i+1,len(arr)):
+        if arr[j]<arr[min_index]:
+            min_index=j
+    arr[i],arr[min_index]=arr[min_index],arr[i]
+print(arr)
+'''
+###insertion sort
+'''
+arr=[5,4,3,2,1]
+i=1
+while i<len(arr):
+    key=arr[i]
+    j=i-1
+    while j>=0 and arr[j]>key:
+        arr[j+1]=arr[j]
+        j-=1
+    arr[j+1]=key
+    i+=1
+print(arr)
+'''
+#merge sort
+'''
+def split_marge(arr):
+    if len(arr) <= 1:
+        return arr
+    mid = len(arr) // 2
+    left = arr[:mid]
+    right = arr[mid:]
+    left = split_marge(left)
+    right = split_marge(right)
+    return merge(left, right)
+def merge(left,right):
+    result=[]
+    i=j=0
+    while i<len(left) and j<len(right):
+        if left[i]<right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+arr=[5,4,3,2,1]
+print(split_marge(arr))
+'''
+#quick sort
+'''
+def quick_sort(arr):
+    if len(arr)<=1:
+        return arr
+    pivot = arr[-1]
+    left=[]
+    right=[]
+    for i in range(len(arr)-1):
+        if arr[i]<pivot:
+            left.append(arr[i])
+        else:
+            right.append(arr[i])
+    return quick_sort(left) + [pivot] + quick_sort(right)
+arr = [5,4,3,2,1]
+print(quick_sort(arr))
+'''
+#recursion problem
+'''
+def min_cost(cost,n):
+    if n==0:
+        return cost[0]
+    if n==1:
+        return cost[n]
+    return cost[n] + min(min_cost(cost, n - 1), min_cost(cost, n - 2))
+cost = [10, 15, 20]
+n = len(cost)
+print(min(min_cost(cost, n-1), min_cost(cost, n-2)))
+'''
+#reverse string using recursion
+'''
+def reverse_string(s,left,right):
+    if left>right:
+        return
+    s[left],s[right]=s[right],s[left]
+    reverse_string(s,left+1,right+1)
+s = ["h","e","l","l","o"]
+reverse_string(s, 0, len(s)-1)
+print(s)
+'''
+#
+'''
+def myPow(x, n):
+    if n==0:
+        return 1
+    return x*myPow(x, n-1)
+x =2.00000
+n = 10
+s =myPow(x, n)
+print("{:.5f}".format(s))
+'''
+#median of two sorted arrays
+'''
+nums1 = [1,2]
+nums2 = [3,4]
+new=sorted(nums1+nums2)
+n=len(new)
+if n%2==0:
+    median=(new[n//2-1]+new[n//2])/2
+else:
+    median=new[n//2]
+print(f'{median:.5f}')
+'''
+#longest palindromic substring
+'''
+string="babad"
+left=0
+substring=[]
+max_substring=''
+while left<len(string):
+    right=left+1
+    while right<=len(string):
+        substring.append(string[left:right])
+        right+=1
+    left+=1
+for sub in substring:
+    if sub==sub[::-1] and len(sub)>len(max_substring):
+        max_substring=sub
+print(max_substring)
+'''
+##### zigzag conversion
+'''
+string="PAYPALISHIRING"
+n=3
+rows = [""] * n
+row=0
+going=True
+for char in string:
+    rows[row]+=char
+    if row==0:
+        going=True
+    elif row==n-1:
+        going=False
+
+    if going:
+        row+=1
+    else:
+        row-=1
+final="".join(rows)
+print(final)
+'''
+#cycle rotations tcs
+'''
+import math
+def lcm(numbers):
+    new=math.lcm(*numbers)
+    return  new
+Board = [2,3,1,5,4]
+position_board={}
+cycle=[]
+numbers=[]
+visited=set()
+count_cycles=0
+for i in range(len(Board)):
+    position_board[i+1]=Board[i]
+for key in position_board:
+    if key not in visited:
+        temp=[]
+        while key not in visited:
+            visited.add(key)
+            temp.append(key)
+            key=position_board[key]
+        cycle.append(temp)
+for cycle in cycle:
+    nums=len(cycle)
+    numbers.append(nums)
+print(lcm(numbers))
+'''
+# tcs nqt
+'''
+A = list('abcab')
+B = 'aaabb'
+count=0
+for char in set(B):
+    pos=[]
+    for i in range(len(A)):
+        if A[i]!=char and B[i]==char:
+            pos.append(i)
+    if len(pos)>0:
+        mini=A[pos[0]]
+        for j in pos:
+            if A[j]<mini:
+                mini=A[j]
+        if mini != char:
+            print(-1)
+        count+=1
+        for j in pos:
+            A[j]=char
+print(A)
+print(count)
+'''
+########continous subarray who sum is equal to k
+'''
+N = 10
+K = 15
+coins = [5, 3, 7, 14, 18, 1, 8, 4, 8, 3]
+subarray = []
+left = 0
+while left < len(coins):
+    right = left
+    while right <= len(coins) - 1:
+        sub=coins[left:right+1]
+        if sum(sub)==K:
+            subarray.append(sub)
+        right+=1
+    left+=1
+print(subarray)
+'''
+#betting horses
+'''
+N = 10
+K = 100
+max_length=0
+prices = [30,40,50,20,20,10,90,10,10,10]
+left=0
+final=[]
+while left<len(prices):
+    right=left
+    while right<len(prices):
+        sub=prices[left:right+1]
+        if sum(sub)<K and len(sub)>max_length:
+            max_length=len(sub)
+            final=sub
+        right+=1
+    left+=1
+print(final)
+print(max_length)
+'''
+#fair subsequence
+'''
+A = [-1, 18, 13, 18, 2, 16, -1, -213, 11]
+i=0
+groups=[]
+new=[]
+while i<len(A):
+    group=[]
+    if A[i] < 0:
+        while i < len(A) and A[i] < 0:
+            group.append(A[i])
+            i += 1
+    else:
+        while i<len(A) and A[i]>0:
+            group.append(A[i])
+            i+=1
+    groups.append(group)
+    if group[0]<0:
+        new.append(max(group))
+    else:
+        new.append(max(group))
+print(groups)
+print(new)
+'''
+###
+'''
+prices = [2, 3, 4, 5]
+volumes = [3, 4, 5, 6]
+K = 7
+max_volume = 0
+def solve(i, total_price, total_volume):
+    global max_volume
+    if total_price > K:
+        return
+    max_volume = max(max_volume, total_volume)
+    if i == len(prices):
+        return
+    solve(i + 1, total_price + prices[i], total_volume + volumes[i])
+    solve(i + 1, total_price, total_volume)
+solve(0, 0, 0)
+print(max_volume)
+'''
+#chocolates tcs
+'''
+chocolates=[0,1,0,3,12,0]
+write=0
+for i in range(len(chocolates)):
+    if chocolates[i]>=1:
+        chocolates[write]=chocolates[i]
+        write+=1
+for j in range(write,len(chocolates)):
+    chocolates[j]=0
+print(chocolates)
+'''
+###########tyepwirites
+'''
+a="a##c"
+b="#a#c"
+res1=""
+res2=""
+for char in a:
+    if char!="#":
+        res1+=char
+    else:
+        res1=res1[:-1]
+for char in b:
+    if char!="#":
+        res2+=char
+    else:
+        res2=res2[:-1]
+if res1==res2:
+    print("True")
+else:
+    print("false")
+'''
+#rangeof palindrome
+'''
+l=10
+right=50
+new=""
+for i in range(l,right):
+    s=str(i)
+    if s==s[::-1]:
+        print(i)
+'''
+#grocery store discount
+'''
+n=int(input())
+amount=0
+if n<1000:
+    discount=5
+    amount=n-((discount/100)*n)
+elif n<=5000:
+    discount=10
+    amount = n-((discount / 100) * n)
+else:
+    discount=5
+    amount =n- ((discount / 100) * n)
+print(amount)
+'''
+#mergesort
+'''
+def merge(arr):
+    if len(arr)<=1:
+        return arr
+    mid=len(arr)//2
+    left=merge(arr[:mid])
+    right=merge(arr[mid:])
+    return sort(left,right)
+def sort(left,right):
+    i=j=0
+    result=[]
+    while i<len(left) and j<len(right):
+        if left[i]<right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    result.extend(left[i:])
+    result.extend(right[j:])
+    return result
+arr=[5,4,3,2,1]
+print(merge(arr))
+'''
+########insertion sort
+'''
+def insertion_sort(arr):
+    for i in range(len(arr)):
+        key=arr[i]
+        j=i-1
+        while j>=0 and arr[j]>key:
+            arr[j+1]=arr[j]
+            j-=1
+        arr[j+1]=key
+    return arr
+arr=[5,4,3,2,1]
+print(insertion_sort(arr))
+'''
+#binary search
+'''
+arr = [1, 3, 5, 7, 9]
+target=7
+left=0
+right=len(arr)-1
+while left<=right:
+    mid=(left+right)//2
+    if arr[mid]==target:
+        print(mid)
+        break
+    elif arr[mid]<target:
+        left=mid+1
+    else:
+        right=mid-1
+'''
+########
+'''
+nums=[2,7,11,15]
+target=9
+seen = {}
+for i in range(len(nums)):
+    diff = target - nums[i]
+    if diff in seen:
+        print([seen[diff],i])
+    seen[nums[i]]=i
+'''
+###
+'''
+s = "A man, a plan, a canal: Panama"
+clean=""
+for ch in  s:
+    if ch.isalnum():
+        clean+=ch.lower()
+if clean==clean[::-1]:
+    print("it is a palindrome")
+else:
+    print("No")
+'''
+#valid paranthesis
+'''
+s = "([]){}"
+stack = []
+for ch in s:
+    if ch in "({[":
+        stack.append(ch)
+    else:
+        if not stack:
+            print("invalid")
+            break
+
+        top = stack.pop()
+
+        if ch == ")" and top != "(":
+            print("invalid")
+            break
+        if ch == "]" and top != "[":
+            print("invalid")
+            break
+        if ch == "}" and top != "{":
+            print("invalid")
+            break
+else:
+    if len(stack) == 0:
+        print("valid")
+    else:
+        print("invalid")
+'''
+#climb steps problem
+'''
+def climb_steps(n):
+    if n==1:
+        return 1
+    if n==2:
+        return 2
+    else:
+        return climb_steps(n-1)+climb_steps(n-2)
+print(climb_steps(3))
+'''
+#flipping bits
+'''
+arr=[0,1,0,1,1]
+count=0
+if arr[0]==0:
+    count=1
+for i in range(1,len(arr)):
+    if arr[i]!=arr[i-1]:
+        count+=1
+print(count)
+'''
+############
+'''
+n=5
+arr=[40,10,30,20,50]
+index=2
+element_before_sort=0
+for i in range(len(arr)):
+    if i==index:
+        element_before_sort=arr[i]
+new=sorted(arr)
+for i in range(len(new)):
+    if new[i]==element_before_sort:
+        print(i)
+'''
+###########
+'''
+height = [1,8,6,2,5,4,8,3,7]
+i=0
+j=len(height)-1
+max_water=0
+while i<j:
+    width=j-i
+    h=min(height[i],height[j])
+    area=width*h
+    if area>max_water:
+        max_water=area
+    if height[i]<height[j]:
+        i+=1
+    else:
+        j-=1
+print(max_water)
+'''
+#################################
+'''
+def quicksort(arr, low, high):
+    if low < high:
+        pivot_index = partition(arr, low, high)
+
+        # This index is in ORIGINAL array
+        print("Pivot:", arr[pivot_index], "Original Index:", pivot_index, "->", arr)
+
+        quicksort(arr, low, pivot_index - 1)
+        quicksort(arr, pivot_index + 1, high)
+
+
+def partition(arr, low, high):
+    pivot = arr[high]  # last element
+    i = low - 1
+
+    for j in range(low, high):
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    # place pivot in correct position
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+    return i + 1
+arr = [5, 4, 3, 2, 1]
+quicksort(arr, 0, len(arr) - 1)
+print("Final:", arr)
+'''
+#tcs status using hasing
+'''
+n=int(input())
+values_dict={}
+sum_count=0
+for i in range(n):
+    key,value=map(int,input().split())
+    values_dict[key]=value
+q=int(input())
+for i in range(q):
+    queruid=int(input())
+    for key,values in values_dict.items():
+        if key==queruid:
+            if values==1:
+                sum_count+=queruid
+            else:
+                sum_count-=queruid
+            break
+print(sum_count)
+'''
+#quicksort using pivot as 1st element
+'''
+def quick_sort(arr):
+    if len(arr)<=1:
+        return arr
+    pivot=arr[0]
+    left=[]
+    right=[]
+    for i in range(1,len(arr)):
+        if arr[i]<pivot:
+            left.append(arr[i])
+        else:
+            right.append(arr[i])
+    return quick_sort(left) + [pivot] + quick_sort(right)
+arr=[5,3,8,4,2]
+print(quick_sort(arr))
+'''
+####correct quicksort
+'''
+def partition(arr,low,high):
+    pivot=arr[low]
+    i=low+1
+    j=len(arr)-1
+    while True:
+        while i<=high and arr[i]<pivot:
+            i+=1
+        while arr[j]>pivot:
+            j-=1
+        if i<j:
+            arr[i], arr[j] = arr[j], arr[i]
+        else:
+            break
+    arr[low],arr[j] = arr[j], arr[low]
+    print(j,end=" ")
+    return j
+def quick_sort(arr,low,high):
+    if low<high:
+        pindex=partition(arr,low,high)
+        quick_sort(arr,low,pindex-1)
+        quick_sort(arr, pindex + 1, high)
+n = 5
+arr =[8,7,6,5,4]
+quick_sort(arr, 0, n - 1)
+print()
+for i in range(n):
+    print(arr[i], end=" ")
+'''
+# merge_sort
+'''
+def merge(arr):
+    if len(arr)<=1:
+        return arr
+    mid=len(arr)//2
+    left=arr[:mid]
+    right=arr[mid:]
+    left=merge(left)
+    right=merge(right)
+    return sort(left,right)
+def sort(left,right):
+    result=[]
+    i=j=0
+    while i<len(left) and j<len(right):
+        if left[i]<right[j]:
+            result.append(left[i])
+            i+=1
+        else:
+            result.append(right[j])
+            j+=1
+    result+=left[i:]
+    result+=right[j:]
+    return result
+arr=[5,4,3,2,1]
+print(merge(arr))
+'''
+#spiral matrix
+'''
+def spiral_matrix(matrix):
+    result=[]
+    top = 0
+    bottom = len(matrix) - 1
+    left = 0
+    right = len(matrix[0]) - 1
+
+    while top <= bottom and left <= right:
+        for i in range(left,right+1):
+            result.append(matrix[top][i])
+        top+=1
+        for i in range(top,bottom+1):
+            result.append(matrix[i][right])
+        right-=1
+
+        if top<=bottom:
+            for i in range(right, left - 1, -1):
+                result.append(matrix[bottom][i])
+            bottom-=1
+        if left<=right:
+            for i in range(bottom,top - 1, -1):
+                result.append(matrix[i][left])
+            left+=1
+    return result
+matrix = [[1,2,3],[4,5,6],[7,8,9]]
+print(spiral_matrix(matrix))
+'''
+###
+'''
+def ship_with_weight(weights,days):
+    left=max(weights)
+    right=sum(weights)
+    while left<right:
+        mid=(left+right)//2
+        total=0
+        needed_days=1
+        for w in weights:
+            if total+w>mid:
+                needed_days+=1
+                total=0
+            total+=w
+
+        if needed_days<=days:
+            right=mid
+        else:
+            left=mid+1
+    return left
+weights = [1,2,3,4,5,6,7,8,9,10]
+days = 5
+print(ship_with_weight(weights,days))
+'''
+###########################################
+'''
+matrix=[[1,2,3],[4,5,6],[7,8,9]]
+valid_matrix=10
+count=0
+for i in range(len(matrix)):
+    sum_matrix=0
+    for j in range(len(matrix[0])):
+        sum_matrix+=matrix[i][j]
+    if sum_matrix>valid_matrix:
+        count+=1
+print(count)
+'''
+#merge_intervals_overlap
+'''
+intervals = [[1,3],[2,6],[8,10],[15,18]]
+intervals.sort()
+result=[]
+for interval in intervals:
+    if not result:
+        result.append(interval)
+    else:
+        last=result[-1]
+        if interval[0]<last[1]:
+            last[1]=max(last[1],interval[1])
+        else:
+            result.append(interval)
+print(result)
+'''
+#set matrix zeros
+'''
+matrix = [[1,1,1],[1,0,1],[1,1,1]]
+rows=len(matrix)
+cols=len(matrix[0])
+zeros_rows=set()
+zeros_cols=set()
+for i in range(rows):
+    for j in range(cols):
+        if matrix[i][j]==0:
+            zeros_rows.add(i)
+            zeros_cols.add(j)
+for i in zeros_rows:
+    for j in range(cols):
+        matrix[i][j]=0
+for j in zeros_cols:
+    for i in range(rows):
+        matrix[i][j] = 0
+print(matrix)
+'''
+#subarray sum  equal to k
+'''
+nums = [1, 1, 1]
+k=2
+count = 0
+sums = 0
+d = {0: 1}
+for num in nums:
+    sums += num
+    count += d.get(sums - k, 0)
+    d[sums] = d.get(sums, 0) + 1
+print(count)
+'''
+################tcs
+'''
+arr=[7,4,8,2,9]
+count=0
+for i in range(len(arr)):
+    before_elements=arr[:i]
+    if arr[i]>max(before_elements):
+        count+=1
+print(count)
+'''
+#########################
+'''
+set_str = "bbbaaababa"
+value=3
+new=[]
+i=0
+count=0
+while i<len(set_str):
+    ram=[]
+    for j in range(value):
+        if i+j<len(set_str):
+            ram.append(set_str[i+j])
+    new.append(ram)
+    count+=1
+    if len(ram)!=value:
+        count-=1
+    i+=value
+print(count)
+'''
+#international round table conference
+'''
+matrixA=[[1,2],
+         [3,4]]
+matrixB=[[5,6],
+         [7,8]]
+result=[]
+rows=len(matrixA)
+cols=len(matrixB[0])
+for i in range(rows):
+    row=[]
+    for j in range(cols):
+        sum_val = 0
+        for k in range(len(matrixB)):
+            sum_val+=matrixA[i][k]*matrixB[k][j]
+        row.append(sum_val)
+    result.append(row)
+print(result)
+'''
+###quik sort poorna anna approach
+'''
+def partition(arr,low,high):
+    pivot=arr[low]
+    i=low+1
+    j=len(arr)-1
+    while True:
+        while i<=high and arr[i]<=pivot:
+            i+=1
+        while arr[j]>pivot:
+            j-=1
+        if i<j:
+            arr[i],arr[j]=arr[j],arr[i]
+        else:
+            break
+    arr[low],arr[j]=arr[j],arr[low]
+    print(j,end="")
+    return j
+def quick_sort(arr,low,high):
+    if low<high:
+        pindex=partition(arr,low,high)
+        quick_sort(arr, low, pindex - 1)
+        quick_sort(arr, pindex + 1, high)
+n = 5
+arr =[5,4,3,2,1]
+quick_sort(arr, 0, n - 1)
+print()
+for i in range(n):
+    print(arr[i], end=" ")
+'''
+#sqaures of sorted array
+'''
+nums = [-4,-1,0,3,10]
+squ_numbers=[]
+for i in range(len(nums)):
+    sq=nums[i]**2
+    squ_numbers.append(sq)
+print(sorted(squ_numbers))
+'''
+# https://leetcode.com/problems/task-scheduler/description/
+'''
+from collections import Counter
+def leastInterval(tasks, n):
+    freq = Counter(tasks)
+    print(freq)
+    maxFreq = max(freq.values())
+    countMax = list(freq.values()).count(maxFreq)
+    ans = (maxFreq - 1) * (n + 1) + countMax
+    return max(len(tasks), ans)
+tasks = ["A","C","A","B","D","B"]
+n = 1
+print(leastInterval(tasks,n))
+'''
+#tcs today questions
+'''
+sum_prime=0
+inp=[2,3,4,5,6,7]
+prime=False
+for j in inp:
+    for i in range(2,j):
+        if j%i==0:
+            prime=False
+        prime=True
+    if prime:
+        print(j)
+'''
+
+##
+'''
+serial=[1,2,3,4]
+benefit=[10,20,30,40]
+capacity=[2,3,4,5]
+N=6
+dict_print={}
+for i in range(len(serial)):
+    for j in range(i+1,len(serial)):
+        if capacity[i]+capacity[j]<=N:
+            valid_pairs=(serial[i],serial[j])
+            sum_benfits=benefit[i]+benefit[j]
+            dict_print[valid_pairs]=sum_benfits
+print(max(dict_print.values()))
+'''
+
+###length of longest substring without nonrepeating characters
+'''
+s="abcabcbb"
+left=0
+max_substring_length=0
+max_substring=""
+while left<len(s):
+    seen=set()
+    substring=""
+    right=left
+    while right<len(s):
+        if s[right] in seen:
+            break
+        seen.add(s[right])
+        substring+=s[right]
+        if len(substring) > max_substring_length:
+            max_substring_length = len(substring)
+            max_substring = substring
+        right += 1
+        left += 1
+print(max_substring_length)
+print(max_substring)
+'''
+#longest palindromic substring
+'''
+s="babad"
+left=0
+max_longest_length_palindrome_substring=0
+max_palindrome_substring=""
+while left<len(s):
+    right=left
+    substring=""
+    while right<len(s):
+        substring+=s[right]
+        if substring==substring[::-1] and len(substring)>max_longest_length_palindrome_substring:
+            max_longest_length_palindrome_substring = len(substring)
+            max_palindrome_substring = substring
+        right+=1
+    left+=1
+print(max_longest_length_palindrome_substring)
+print(max_palindrome_substring)
+'''
+#own question
+#max consecutive bit
+'''
+arr = [0,1,0,1,1,1,1]
+max_count = 0
+count = 1
+for i in range(1, len(arr)):
+    if arr[i] == arr[i-1]:
+        count += 1
+    else:
+        count = 1
+
+    if count > max_count:
+        max_count = count
+
+print(max_count)
+'''
+#maximum gap leetcode problem
+'''
+nums = [3,6,9,1]
+nums.sort()
+max_difference=0
+for i in range(1,len(nums)):
+    difference=nums[i]-nums[i-1]
+    if difference > max_difference:
+        max_difference=difference
+print(max_difference)
+'''
+#group anagrams
+'''
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+groups={}
+for word in strs:
+    key="".join(sorted(word))
+    if key in groups:
+        groups[key].append(word)
+    else:
+        groups[key]=[word]
+final=list(groups.values())
+print(final)
+'''
+#convert 1d into 2d array
+'''
+original = [1,2,3,4]
+m=2
+n=2
+result=[]
+i=0
+for row in range(m):
+    temp=[]
+    for col in range(n):
+        temp.append(original[i])
+        i+=1
+    result.append(temp)
+print(result)
+'''
+#rotate image
+'''
+matrix = [[1,2,3],[4,5,6],[7,8,9]]   #output should be [[7,4,1],[8,5,2],[9,6,3]]
+for i in range(len(matrix)):
+    for j in range(i+1,len(matrix)):
+        matrix[i][j],matrix[j][i] = matrix[j][i],matrix[i][j]
+for row in matrix:
+    row.reverse()
+print(matrix)
+'''
+################
+'''
+def totalUnique(s):
+    total = 0
+    i = 0
+    while i < len(s):
+        j = i
+        while j < len(s):
+            sub = s[i:j + 1]
+
+            unique_chars = set(sub)
+            count = 0
+
+            for ch in unique_chars:
+                if sub.count(ch) == 1:
+                    count += 1
+
+            total += count
+            j += 1
+        i += 1
+
+    return total
+print(totalUnique("ABC"))
+'''
+##bubblesort
+'''
+arr=[5,4,3,2,1]
+for i in range(len(arr)):
+    for j in range(len(arr)-1):
+        if arr[j]>arr[j+1]:
+            arr[j],arr[j+1]=arr[j+1],arr[j]
+print(arr)
+'''
+#quicksort
+'''
+def partition(arr, low, high):
+    pivot = arr[low]
+    i = low + 1
+    j = high
+
+    while True:
+        while i <= high and arr[i] < pivot:
+            i += 1
+
+        while j >= low and arr[j] > pivot:
+            j -= 1
+
+        if i < j:
+            arr[i], arr[j] = arr[j], arr[i]
+        else:
+            break
+
+    arr[low], arr[j] = arr[j], arr[low]
+    print(j, end=" ")
+    return j
+
+
+def quick_sort(arr, low, high):
+    if low < high:
+        pindex = partition(arr, low, high)
+
+        quick_sort(arr, low, pindex - 1)
+        quick_sort(arr, pindex + 1, high)
+
+
+arr = [5, 4, 3, 2, 1]
+quick_sort(arr, 0, len(arr) - 1)
+print(arr)
+'''
+#####4
+'''
+def partition(arr, low, high):
+    pivot = arr[high]   # last element as pivot
+    i = low - 1         # pointer for smaller elements
+
+    for j in range(low, high):
+        if arr[j] < pivot:
+            i += 1
+            arr[i], arr[j] = arr[j], arr[i]
+
+    # place pivot at correct position
+    arr[i + 1], arr[high] = arr[high], arr[i + 1]
+
+    return i + 1
+
+
+def quick_sort(arr, low, high):
+    if low < high:
+        pindex = partition(arr, low, high)
+
+        quick_sort(arr, low, pindex - 1)
+        quick_sort(arr, pindex + 1, high)
+
+
+# Driver code
+arr = [5, 4, 3, 2, 1]
+quick_sort(arr, 0, len(arr) - 1)
+print(arr)
+'''
+
+'''
+
+def can_complete(gas, cost):
+    total = 0
+    tank = 0
+    start = 0
+
+    for i in range(len(gas)):
+        diff = gas[i] - cost[i]
+
+        total += diff
+        tank += diff
+
+        if tank < 0:
+            start = i + 1
+            tank = 0
+
+    if total >= 0:
+        return start
+    else:
+        return -1
+print(can_complete([1,2,3,4,5],[3,4,5,1,2]))
+'''
+###################
+'''
+colum_title="AB"
+result=0
+for ch in colum_title:
+    value = ord(ch) - ord('A') + 1
+    result = result * 26 + value
+print(result)
+'''
+#mine tcs problem
+'''
+arr = input().split()
+
+# Validate input
+try:
+    arr = list(map(int, arr))
+except:
+    print("Invalid Input")
+    exit()
+
+if len(arr) < 3:
+    print("Invalid Input")
+    exit()
+
+n, weight = arr[0], arr[1]
+values = arr[2:]
+
+if n != len(values):
+    print("Invalid Input")
+    exit()
+
+result = []
+
+for i in range(len(values)):
+    current_sum = 0
+    count = 0
+
+    for j in range(i, len(values)):
+        if current_sum + values[j] <= weight:
+            current_sum += values[j]
+            count += 1
+        else:
+            break
+    if count >= 2:
+        result.append(values[i])
+
+print(result)
+'''
+#polymorphsim
+'''
+class Robo():
+    def learn(self):
+        print("robots can  learn")
+    def charge(self):
+        print("robots can charge")
+    def tasks(self):
+        print("robots can do tasks")
+def operaterobo(robo):
+    robo.learn()
+    robo.tasks()
+    robo.charge()
+robo=Robo()
+operaterobo(robo)
+robo2=Robo()
+operaterobo(robo2)
+'''
+
+#casting  is no needed in python
+'''
+class Media:
+    def play(self):
+        print("media plays generic content")
+
+    def display_info(self):
+        print("Displaying media information")
+
+
+# Child class Video
+class Video(Media):
+    def play(self):   # method overriding
+        print("video plays with animation")
+
+    def adjust_quality(self):
+        print("adjusting video quality settings")
+
+
+# Child class Photo
+class Photo(Media):
+    def play(self):   # method overriding
+        print("photo shows with effects")
+
+    def apply_filter(self):
+        print("applying filter to photo")
+mymedia=Video()
+mediaphoto=Photo()
+mymedia.play()
+mymedia.adjust_quality()
+mediaphoto.apply_filter()
+'''
+#decrease value of food everytime you purchase
+'''
+N = int(input())
+M = int(input())
+vd = {}
+for i in range(N):
+    v = int(input())
+    d = int(input())
+
+    vd[i] = [v, d]
+
+total_best = 0
+for j in range(M):
+    current_best=-1
+    best_food=-1
+    for key,values in vd.items():
+        current_taste=values[0]
+        if current_taste>current_best:
+            current_best=current_taste
+            best_food=key
+    total_best+=current_best
+    vd[best_food][0]=vd[best_food][0]-vd[best_food][1]
+print(total_best)
+'''
+#infosys 2nd question(medium problem)
+'''
+def kadane(arr):
+    cur = arr[0]
+    best = arr[0]
+    for i in range(1, len(arr)):
+        cur = max(arr[i], cur + arr[i])
+        best = max(best, cur)
+    return best
+n = 5
+arr = [3,-8,4,5,-2]
+ans = kadane(arr)
+for i in range(n):
+    for j in range(i + 1, n):
+        arr[i], arr[j] = arr[j], arr[i]
+        ans = max(ans, kadane(arr))
+        arr[i], arr[j] = arr[j], arr[i]
+print(ans)
+'''
+#backtracking problem best
+'''
+def solve(remaining, ans):
+    if len(remaining) == 0:
+        print(ans)
+        return
+    for i in range(1, len(remaining) + 1):
+        group = remaining[:i]
+        ans.append(group)
+        solve(remaining[i:], ans)
+        ans.pop()
+n = 3
+nums = [1,2,3]
+solve(nums, [])
+'''
+# maximum sum of non adjacent houses
+'''
+def solve(i, total):
+    global ans
+    if i >= n:
+        ans = max(ans, total)
+        return
+    solve(i + 2, total + arr[i])  # take
+    solve(i + 1, total)           # skip
+arr = [3,2,7,10]
+n = len(arr)
+ans = 0
+
+solve(0, 0)
+
+print(ans)
+'''
+#another way of solving non adjacent houses robbery
+'''
+arr = [3,2,7,10,11,12]
+def solve(i):
+    if i >= len(arr):
+        return 0
+    take = arr[i] + solve(i + 2)
+    skip = solve(i + 1)
+    return max(take, skip)
+print(solve(0))
+'''
+#next permutation
+'''
+arr=[1,2,3]
+pivot=-1
+for i in range(len(arr)-2,-1,-1):
+    if arr[i]<arr[i+1]:
+        pivot=i
+        break
+if pivot!=-1:
+    next_biggest=float('inf')
+    index=-1
+    for j in range(pivot+1,len(arr)):
+        if arr[j]>arr[pivot] and arr[j]<next_biggest:
+            next_biggest=arr[j]
+            index=j
+        arr[j],arr[pivot]=arr[pivot],arr[j]
+left=pivot+1
+right=len(arr)-1
+while left<right:
+    arr[left],arr[right]=arr[right],arr[left]
+    left+=1
+    right-=1
+print(arr)
+'''
+#recursion and backtracking
+'''
+def tone(i,n):
+    if i==n:
+        return n
+    else:
+        print(i)
+    return tone(i+1,n)
+n=3
+print(tone(0,3))
+'''
+############
+''''
+def recurs(n):
+    if n==0:
+        return 0
+    return n+recurs(n-1)
+a=int(input())
+print(recurs(a))
+'''
+######fibonacci
+'''
+def fibonacci(n):
+    if n==0:
+        return 0
+    elif n==1:
+        return 1
+    else:
+        return fibonacci(n-1)+fibonacci(n-2)
+print(fibonacci(4))
+'''
+#####Tower of Hanoi algorithm
+'''
+def towerofhanoi(n,src,helper,destination):
+    if n==1:
+        print("transferdisk",n,"from",src,"to",destination)
+        return
+    towerofhanoi(n-1,src, destination, helper)
+    print("transfer disk",n,"from",src,"to",destination)
+    towerofhanoi(n-1,helper, src, destination)
+n=3
+towerofhanoi(n,"S",'H',"D")
+'''
+########string in reverse using recursion
+'''
+def reverse(a, i):
+    if i == 0:
+        print(a[i])
+        return
+    print(a[i])
+    reverse(a, i-1)
+a = "abcd"
+length = len(a)-1
+reverse(a, length)
+'''
+######
+'''
+arr=[0,0,1,1,1,2,2,3,3,4]
+
+i=0
+
+for j in range(1,len(arr)):
+
+    if arr[i] != arr[j]:
+        i += 1
+        arr[i] = arr[j]
+
+print(arr[:i+1])
+'''
+#infosys problem
+#cost of string is balanced
+'''
+s = ")("
+cost_of_adding_opened=2
+cost_of_adding_closed=3
+stack=[]
+open_needed=0
+for ch in s:
+    if ch=="(":
+        stack.append(ch)
+    else:
+        if stack:
+            stack.pop()
+        else:
+            open_needed+=1
+closed_needed=len(stack)
+total_cost=(open_needed*cost_of_adding_opened) + (closed_needed*cost_of_adding_closed)
+print(open_needed)
+print(closed_needed)
+print(total_cost)
+'''
+## josephus problem
+'''
+arr=[1,2,3,4,5]
+n=2
+i=0
+while len(arr)>1:
+   i=i+n-1
+   while i>=len(arr):
+       i=i-len(arr)
+   arr.pop(i)
+print(arr[0])
+'''
+###josephus problem using recursion
+'''
+k=2
+def josephus(arr,i):
+    if len(arr)==1:
+        return arr[0]
+    i=i+k-1
+    while i>=len(arr):
+        i=i-len(arr)
+    arr.pop(i)
+    return josephus(arr,i)
+arr=[1,2,3,4,5]
+print(josephus(arr,0))
+'''
+###merge two sorted_list using recursion
+'''
+list1=[1,2,4]
+list2=[1,3,4]
+
+def merge(list1,list2):
+
+    if len(list1)==0:
+        return list2
+
+    if len(list2)==0:
+        return list1
+
+    if list1[0] <= list2[0]:
+        return [list1[0]] + merge(list1[1:],list2)
+
+    else:
+        return [list2[0]] + merge(list1,list2[1:])
+
+print(merge(list1,list2))
+'''
+########subsets of a given array  using recursion
+'''
+def subsets(arr):
+    result=[]
+    def backtrack(index,current):
+        if index==len(arr):
+            result.append(current[:])
+            return
+        current.append(arr[index])
+        backtrack(index+1,current)
+        current.pop()
+        backtrack(index+1,current)
+    backtrack(0,[])
+    return result
+print(subsets([1,2,3]))
+'''
+#top infosys
+#elimination game
+'''
+def eliminate_game(arr):
+
+    left = True
+
+    while len(arr) > 1:
+
+        new = []
+
+        # LEFT TO RIGHT
+        if left:
+
+            for i in range(len(arr)):
+
+                # keep alternate positions
+                if i % 2 == 1:
+                    new.append(arr[i])
+
+        # RIGHT TO LEFT
+        else:
+
+            arr.reverse()
+
+            for i in range(len(arr)):
+
+                # keep alternate positions
+                if i % 2 == 1:
+                    new.append(arr[i])
+
+            new.reverse()
+
+        arr = new
+
+        # change direction
+        left = not left
+
+    return arr[0]
+
+
+print(eliminate_game([1,2,3,4,5,6,7,8,9]))
+'''
+##recursion using elimination game
+'''
+def recurse_eliminate(arr, n, left):
+
+    if n == 1:
+        return arr[0]
+
+    new = []
+
+    if left:
+
+        for i in range(n):
+
+            if i % 2 == 1:
+                new.append(arr[i])
+
+        return recurse_eliminate(new, n//2, False)
+
+    else:
+
+        arr.reverse()
+
+        for j in range(n):
+
+            if j % 2 == 1:
+                new.append(arr[j])
+
+        new.reverse()
+
+        return recurse_eliminate(new, n//2, True)
+
+
+print(recurse_eliminate([1,2,3,4,5,6,7,8,9], 9, True))
+'''
+#leetcode2 today
+#players logic
+
