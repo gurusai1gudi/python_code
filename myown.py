@@ -5,9 +5,7 @@ num1=4
 num2=5
 print(sum_addition(num1,num2))
 '''
-from typing import List
-
-from torch.utils.data.datapipes.dataframe.dataframe_wrapper import get_len
+from prometheus_client import values
 
 '''
 from django.contrib.sitemaps.views import index
@@ -7695,6 +7693,1068 @@ def recurse_eliminate(arr, n, left):
 
 print(recurse_eliminate([1,2,3,4,5,6,7,8,9], 9, True))
 '''
-#leetcode2 today
-#players logic
+# recursion leetcode
+'''
+def invert(value):
 
+    result = ""
+
+    for ch in value:
+
+        if ch == "1":
+            result += "0"
+        else:
+            result += "1"
+
+    return result
+
+
+def reverse(value):
+    return value[::-1]
+
+
+def bittostring(n):
+    s = "0"
+    for i in range(2, n + 1):
+        s = s + "1" + reverse(invert(s))
+    return s
+def getvalue(n, k):
+    found_value = bittostring(n)
+    return found_value[k - 1]
+n = int(input())
+k = int(input())
+
+print(getvalue(n, k))
+'''
+#winner of circular game
+'''
+def removekthperson(arr,k,index=0):
+    if len(arr)<=1:
+        return arr[0]
+    new=[]
+    remove_index=(index+k-1)%len(arr)
+    for i in range(len(arr)):
+        if i!=remove_index:
+            new.append(arr[i])
+    return removekthperson(new,k,remove_index%len(new))
+print(removekthperson([1,2,3,4,5],2))
+'''
+#kth symbol in grammar
+'''
+n=int(input())
+k=int(input())
+def build(row,current_row):
+    if current_row==n:
+        return row
+    new=""
+    for ch in row:
+        if  ch=="0":
+            new+="01"
+        else:
+            new+="10"
+    return build(new,current_row+1)
+'''
+#### printing numbers of insertion sort in desceinfinf order
+'''
+def insertion_sort(arr):
+    for i in range(len(arr)):
+        key=arr[i]
+        j=i-1
+        while j>=0 and arr[j]>key:
+            arr[j+1]=arr[j]
+            j=j-1
+        arr[j+1]=key
+    return  arr
+arr=[3,2,4,6,2]
+sorted=insertion_sort(arr)
+for i in range(len(sorted)-1,-1,-1):
+    print(sorted[i])
+'''
+#### finding all permutations using backtracking
+#start with empty path
+'''
+nums = [1,2,3]
+
+def backtrack(path):
+
+    if len(path) == 3:
+        print(path)
+        return
+
+    for num in nums:
+
+        if num not in path:
+            path.append(num)
+            backtrack(path)
+            path.pop()
+
+backtrack([])
+'''
+#making two arrays equal by reversing subarrays
+'''
+target=list(map(int,input().split()))
+arr=list(map(int,input().split()))
+found=False
+left=0
+while left<len(arr):
+    right=left+1
+    while right<len(arr):
+        subarray=arr[left:right+1]
+        arr[left:right+1]=subarray[::-1]
+        if arr==target:
+            print(arr)
+            found=True
+        arr[left:right+1]=subarray
+        right+=1
+    left+=1
+if not found:
+    print("not possible")
+'''
+#####partition array according to given pivot
+'''
+nums = [9, 12, 5, 10, 14, 3, 10]
+pivot = 10
+list1=[]
+list2=[]
+list3=[]
+for i in range(len(nums)):
+    if nums[i]<pivot:
+        list1.append(nums[i])
+    elif nums[i]==pivot:
+        list2.append(nums[i])   
+    else:
+        list3.append(nums[i])
+result=list1+list2+list3
+print(result)
+'''
+# H-INDEX
+'''
+citations = [3,0,6,1,5]#6 5 3 1 0
+citations.sort(reverse=True)
+n=len(citations)
+count=0
+new=[]
+for i in range(n):
+    if citations[i]>i:
+        count+=1
+print(count)
+'''
+#two pointers
+'''
+nums = [2,3,4,1,5]#1 2 3 4 5
+nums.sort()
+left = 0
+right = len(nums) - 1
+target = 8
+while left <= right:
+    result = nums[left] * nums[right]
+    if result == target:
+        print(nums[left], nums[right])
+        break
+    elif result < target:
+        left += 1
+    else:
+        right -= 1
+'''
+#char mapping transformers based on rules
+'''
+n=int(input())
+a,b=map(str,input(" "))
+arr_list=list(map(str,input().split()))
+count_a=0
+count_b=0
+for char in arr_list:
+    if char==a:
+        count_a+=1
+    else:
+        count_b+=1
+print(count_a,count_b)
+print(count_a,count_b)
+print("n")
+print(arr_list)
+return_type=arr_list.sort('asdf')
+#1 row sudoku
+'''
+#heap sort the arr
+'''
+def heapify(arr, n, i):
+
+    largest = i
+    left = 2 * i + 1
+    right = 2 * i + 2
+
+    if left < n and arr[left] > arr[largest]:
+        largest = left
+
+    if right < n and arr[right] > arr[largest]:
+        largest = right
+
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+
+def heap_sort(arr):
+    n = len(arr)
+    # Build Max Heap
+    for i in range(n // 2 - 1, -1, -1):
+        heapify(arr, n, i)
+    # Extract elements one by one
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        heapify(arr, i, 0)
+arr = [4, 10, 3, 5, 1]
+heap_sort(arr)
+print(arr)
+'''
+#design the stacks
+'''
+intervals = [[1,2],[2,3],[3,4],[1,3]]
+after sorting =[[1,2],[2,3],[3,3][1,4]]
+end=2
+count = 0
+
+for i in range(len(intervals)):
+
+    current_interval_start = intervals[i][0]
+    current_interval_end = intervals[i][1]
+
+    for j in range(i + 1, len(intervals)):
+
+        if intervals[j][0] < current_interval_end and intervals[j][1] > current_interval_start:
+
+            count += 1
+
+            intervals.pop(j)
+            break
+
+print(count)
+'''
+###### largest rectangle of 1s in a grid
+#initially all heights are zero
+'''
+def largest_rectangle_histogram(heights):
+    max_area = 0
+
+    for i in range(len(heights)):
+
+        left = i
+        while left > 0 and heights[left - 1] >= heights[i]:
+            left -= 1
+
+        right = i
+        while right < len(heights) - 1 and heights[right + 1] >= heights[i]:
+            right += 1
+
+        width = right - left + 1
+        current_area = heights[i] * width
+
+        if current_area > max_area:
+            max_area = current_area
+
+    return max_area
+
+
+matrix = [
+    [1,0,1,0,0],
+    [1,0,1,1,1],
+    [1,1,1,1,1],
+    [1,0,0,1,0]
+]
+
+heights = [0] * len(matrix[0])
+
+max_area = 0
+
+for i in range(len(matrix)):
+    for j in range(len(matrix[i])):
+        if matrix[i][j] == 1:
+            heights[j] += 1
+        else:
+            heights[j] = 0
+
+    print("Histogram:", heights)
+
+    area = largest_rectangle_histogram(heights)
+    print("Largest Area:", area)
+
+    if area > max_area:
+        max_area = area
+
+print("Maximum Rectangle Area =", max_area)
+'''
+#task manager system using linked list
+#we wanted to do all the tasks and perform valid operations using linkedlist
+'''
+class TaskNode:
+    def __init__(self,title):
+        self.title = title
+        self.status="pending"
+        self.next=None
+class TaskManager:
+    def __init__(self):
+        self.head=None
+
+    def addTask(self, title):
+        new_node = TaskNode(title)
+
+        if self.head is None:
+            self.head = new_node
+        else:
+            temp = self.head
+            while temp.next:
+                temp = temp.next
+            temp.next = new_node
+
+    def completeTask(self, index):
+        current = self.head
+        count = 0
+
+        while current is not None and count < index:
+            current = current.next
+            count += 1
+
+        if current is not None:
+            current.status = "Completed"
+    def deleteTask(self,index):
+        current=self.head
+        previous=None
+        count=0
+        while current is not None and count<index:
+            previous=current
+            current=current.next
+            count+=1
+        if current is not None:
+            if previous is None:
+                self.head=self.head.next
+            else:
+                previous.next=current.next
+
+    def printTask(self):
+        current = self.head
+
+        while current is not None:
+            print(current.title, current.status, end=" ")
+            current = current.next
+        print()
+    def countTasks(self):
+        count=0
+        current=self.head
+        while current is not None:
+            count+=1
+            current=current.next
+        return count
+    def countofpendingandcompleted(self):
+        current=self.head
+        pending_count=0
+        completed_count=0
+        current=self.head
+        while current is not None:
+            if current.status == "Completed":
+                completed_count+=1
+            else:
+                pending_count+=1
+            current=current.next
+        return f'pending:{pending_count},completed:{completed_count}'
+
+
+
+n = int(input())
+new=TaskManager()
+for _ in range(n):
+    command = input().split()
+    if command[0]=="addTask":
+        new.addTask(command[1])
+    elif command[0] == "completeTask":
+        new.completeTask(int(command[1]))
+
+    elif command[0] == "deleteTask":
+        new.deleteTask(int(command[1]))
+
+    elif command[0] == "printTask":
+        new.printTask()
+
+    elif command[0] == "countTasks":
+        print(new.countTasks())
+
+    elif command[0] == "countofpendingandcompleted":
+        print(new.countofpendingandcompleted())
+
+'''
+#central star user
+'''
+n=int(input())
+empty_dict={}
+set_list=[]
+for _ in range(n-1):
+    a,b=input().split()
+    set_list.append(a)
+    set_list.append(b)
+for char in set(set_list):
+    empty_dict[char]=0
+for val in set_list:
+    if val in empty_dict:
+        empty_dict[val]+=1
+    else:
+        empty_dict[val]=1
+for key,values in empty_dict.items():
+    if values==n-1:
+        print(key)
+'''
+#smallest missing postive integer
+'''
+n = int(input())
+arr = list(map(int, input().split()))
+i = 0
+while i < n:
+    correct = arr[i] - 1
+    if 1 <= arr[i] <= n and arr[i] != arr[correct]:
+        arr[i], arr[correct] = arr[correct], arr[i]
+    else:
+        i += 1
+for i in range(n):
+    if arr[i] != i + 1:
+        print(i + 1)
+        break
+else:
+    print(n + 1)
+'''
+###
+'''
+days,target=input().split()
+days=int(days)
+target=int(target)
+daily_profit_loss=list(map(int,input().split()))
+max_sum=0
+current_sum=0
+for i in range(len(daily_profit_loss)):
+    if daily_profit_loss[i]>0:
+        current_sum+=daily_profit_loss[i]
+    else:
+        current_sum=0
+    if current_sum>max_sum:
+        max_sum=current_sum
+
+freq = {0: 1}
+prefix = 0
+count = 0
+for num in daily_profit_loss:
+    prefix += num
+    if prefix - target in freq:
+        count += freq[prefix - target]
+    freq[prefix] = freq.get(prefix, 0) + 1
+print(max_sum,count)
+'''
+#####isomorphic strings
+'''
+s1=input()
+s2=input()
+dict_mappings={}
+is_isomorphic=True
+if len(s1)!=len(s2):
+    is_isomorphic=False
+else:
+    for char in range(len(s1)):
+        if s1[char] not in dict_mappings:
+            if s2[char] in dict_mappings.values():
+                is_isomorphic=False
+                break
+            dict_mappings[s1[char]]=s2[char]
+        else:
+            if dict_mappings[s1[char]]!=s2[char]:
+                is_isomorphic=False
+                break
+print(is_isomorphic)
+'''
+#reverse a linkedlist
+'''
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+class LinkedList:
+    def __init__(self):
+        self.head=None
+
+    def add_linked_list(self, text):
+        new_node = Node(text)
+        if self.head is None:
+            self.head = new_node
+        else:
+            new_node.next = self.head
+            self.head = new_node
+    def reverse_ll(self):
+        prev=None
+        current=self.head
+        while current is not None:
+            next_node=current.next
+            current.next=prev
+            prev=current
+            current=next_node
+        self.head=prev
+
+    def display(self):
+        temp = self.head
+        while temp is not None:
+            print(temp.data, end=" ")
+            temp = temp.next
+news=LinkedList()
+news.add_linked_list(4)
+news.add_linked_list(3)
+news.add_linked_list(2)
+news.add_linked_list(1)
+news.reverse_ll()
+news.display()
+'''
+##########
+'''
+nums = [2, 3, -2, 4]
+
+max_product = nums[0]
+curr_max = nums[0]
+curr_min = nums[0]
+
+for i in range(1, len(nums)):
+    num = nums[i]
+
+    temp = curr_max
+
+    curr_max = max(num, num * curr_max, num * curr_min)
+    curr_min = min(num, num * temp, num * curr_min)
+
+    max_product = max(max_product, curr_max)
+
+print(max_product)
+'''
+'''
+string = ["a", "a", "b", "b", "c", "c", "c"]
+
+i = 0
+index = 0
+count = 1
+
+while i < len(string)-1:
+
+    if string[i+1] == string[i]:
+        count += 1
+        i += 1
+
+    else:
+        string[index] = string[i]
+        index += 1
+
+        if count > 1:
+            string[index] = str(count)
+            index += 1
+
+        count = 1
+        i += 1
+
+string[index] = string[i]
+index += 1
+
+if count > 1:
+    string[index] = str(count)
+    index += 1
+
+print(string[:index])
+'''
+###
+'''
+s = "3[a]2[bc]"
+stack = []
+for char in s:
+    if char != "]":
+        stack.append(char)
+    else:
+        new=""
+        while stack[-1] != "[":
+            new = stack.pop()+new
+        stack.pop()
+        k=stack.pop()
+        new = new * int(k)
+        stack.append(new)
+print(stack)
+'''
+#monotonic stack
+'''
+temperatures=[73,74,75,71,69,72,76,73]
+stack=[]
+wait=[0]*len(temperatures)
+for i in range(len(temperatures)):
+    while stack and temperatures[i]>temperatures[stack[-1]]:
+        index=stack.pop()
+        wait[index]=i-index
+    stack.append(i)
+print(wait)
+'''
+#####Evaluate Reverse Polish Notation
+'''
+tokens = ["2","1","+","3","*"]
+stack=[]
+result=0
+for char in tokens:
+    if char.isnumeric():
+        stack.append(int(char))
+    else:
+        operator=char
+        first_operand=stack.pop()
+        second_operand=stack.pop()
+        result =eval(f'{second_operand}{operator}{first_operand}')
+        stack.append(result)
+print(stack[0])
+'''
+#sliding window maximum
+'''
+nums=[1,3,-1,-3,5,3,6,7]
+k=3
+left=0
+max_elements=[]
+while left<len(nums)-k:
+    right=left+k
+    sub=nums[left:right]
+    max_elements.append(max(sub))
+    left+=1
+print(max_elements)
+'''
+#solving above using deque
+'''
+from collections import deque
+nums=[1,3,-1,-3,5,3,6,7]
+max_elements=[]
+k=3
+dq=deque()
+j=0
+for i in range(k):
+    while dq and nums[dq[-1]]<nums[i]:
+        dq.pop()
+    dq.append(i)
+
+max_elements.append(nums[dq[0]])
+for i in range(k,len(nums)):
+    while dq and dq[0]<=i-k:
+        dq.popleft()
+    while dq and nums[dq[-1]]<nums[i]:
+        dq.pop()
+    dq.append(i)
+    max_elements.append(nums[dq[0]])
+print(max_elements)
+'''
+#adding two numbers in linked list
+'''
+class Node:
+    def __init__(self, value):
+        self.data = value
+        self.next = None
+class LinkedList:
+    def __init__(self):
+        self.head = None
+    def add_from_front(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        new_node.next = self.head
+        self.head = new_node
+    def add_from_last(self, data):
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+    def display(self):
+        current = self.head
+        while current:
+            print(current.data, end=" ")
+            current = current.next
+        print()
+    def add_two_linked_list(self, other):
+        current_1 = self.head
+        current_2 = other.head
+        while current_1 and current_2:
+            sum_val = current_1.data + current_2.data
+            print(sum_val)
+            current_1 = current_1.next
+            current_2 = current_2.next
+LL1 = LinkedList()
+LL2 = LinkedList()
+LL1.add_from_last(1)
+LL1.add_from_last(2)
+LL1.add_from_last(3)
+LL2.add_from_last(4)
+LL2.add_from_last(5)
+LL2.add_from_last(6)
+LL1.display()
+LL2.display()
+LL1.add_two_linked_list(LL2)
+'''
+######
+'''
+def process_orders(orders):
+    totals={}
+    for user,price,quantity in orders:
+        if price<0:
+            print(f"invalid price for user:{user}")
+        elif quantity<0:
+            print(f"invalid quantity for user:{user}")
+        else:
+            for char in user:
+                if char.isdigit():
+                    print(f"suspicious for  user:{user}")
+        else:
+            totals[user]=price*quantity
+n=int(input())
+orders=[]
+for _ in range(n):
+    parts=input().split()
+    user=parts[0]
+    price=int(parts[1])
+    quantity=int(parts[2])
+    orders.append((user, price, quantity))
+process_orders(orders)
+'''
+#greedy approach marble problem4
+#brute force
+'''
+Weights = [1, 3, 5, 1]
+k = 2
+
+max_sum = 0
+min_sum = float('inf')
+
+for i in range(len(Weights) - 1):   # cut after index i
+
+    curr_sum = 0
+    i_weight = []
+    j_weight = []
+
+    for x in range(i + 1):
+        i_weight.append(Weights[x])
+
+    for j in range(i + 1, len(Weights)):
+        j_weight.append(Weights[j])
+
+    curr_sum = (i_weight[0] + i_weight[-1]) + (j_weight[0] + j_weight[-1])
+
+    if curr_sum > max_sum:
+        max_sum = curr_sum
+
+    if curr_sum < min_sum:
+        min_sum = curr_sum
+
+final_sum = max_sum - min_sum
+print(final_sum)
+'''
+#optimal approach
+'''
+def putMarbles(weights, k):
+    pair_sum = []
+    for i in range(len(weights) - 1):
+        pair_sum.append(weights[i] + weights[i + 1])
+    pair_sum.sort()
+    min_sum = 0
+    max_sum = 0
+    for i in range(k - 1):
+        min_sum += pair_sum[i]
+        max_sum += pair_sum[len(pair_sum) - 1 - i]
+    return max_sum - min_sum
+weights = [1, 3, 5, 1]
+k = 3
+print(putMarbles(weights, k))
+'''
+# square Matrix
+#read the matrix,print the original matrix, transpose it, print the transpose matrix, find both diagonals of transpose matrix, consider only even numbers, if a number appears in both diagonalscount it once, p[rint the sum
+'''
+matrix=[[1,2,3],[4,5,6],[7,8,9]]
+#printint the transpose of a matrix
+final=[]
+left_diagonal=[]
+right_diagonal=[]
+final_fixed=[]
+for i in range(len(matrix)):
+    new_matrix=[]
+    for j in range(len(matrix)):
+        new_matrix.append(matrix[j][i])
+    final.append(new_matrix)
+for k in range(len(matrix)):
+    left_diagonal.append(matrix[k][k])
+    right_diagonal.append(matrix[k][len(matrix)-k-1])
+final_fixed=set(left_diagonal+right_diagonal)
+print(sum(final_fixed))
+'''
+#first and last occurance
+'''
+def searchRange(nums, target):
+    first = -1
+    last = -1
+    low = 0
+    high = len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            first = mid
+            high = mid - 1
+        elif nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    low = 0
+    high = len(nums) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if nums[mid] == target:
+            last = mid
+            low = mid + 1
+        elif nums[mid] < target:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return [first, last]
+nums = [5,7,7,8,8,10]
+print(searchRange(nums,8))
+'''
+#finding the right interval binary search
+'''
+intervals = [[3,4],[2,3],[1,2]]
+interval_ranges = [-1] * len(intervals)
+for i in range(len(intervals)):
+    current_char=intervals[i]
+    min_start = float("inf")
+    index = -1
+    for j in range(len(intervals)):
+        if current_char!=intervals[j]:
+            if intervals[j][0]>=current_char[1]:
+                if intervals[j][0] < min_start:
+                    min_start = intervals[j][0]
+                    index = j
+    interval_ranges[i]=index
+print(interval_ranges)
+'''
+#same problem  with binary search
+'''
+intervals = [[3,4],[2,3],[1,2]]
+starts = []
+for i in range(len(intervals)):
+    starts.append((intervals[i][0], i))
+starts.sort()
+answer = [-1] * len(intervals)
+for i in range(len(intervals)):
+    current_char = intervals[i]
+    low = 0
+    high = len(starts) - 1
+    index = -1
+    while low <= high:
+        mid = (low + high) // 2
+        if starts[mid][0] >= current_char[1]:
+            index = starts[mid][1]
+            high = mid - 1
+        else:
+            low = mid + 1
+    answer[i] = index
+print(answer)
+'''
+#something key value pairs using binarysearch
+'''
+class TimeStamp:
+    answer=""
+    fit_dict = {}
+    def set(self, key, value, timestamp):
+        if key not in self.fit_dict:
+            self.fit_dict[key] = [(timestamp, value)]
+        else:
+            self.fit_dict[key].append((timestamp, value))
+    def get(self,key,timestamp):
+        if key not  in self.fit_dict:
+            return ""
+        else:
+            left=0
+            right=len(self.fit_dict[key])-1
+            while left<=right:
+                mid=(left+right)//2
+                if self.fit_dict[key][mid][0]==timestamp:
+                    return self.fit_dict[key][mid][1]
+                elif self.fit_dict[key][mid][0]<timestamp:
+                    self.answer=self.fit_dict[key][mid][1]
+                    left=mid+1
+                else:
+                    right=mid-1
+        return self.answer
+new=TimeStamp()
+new.set("foo","bar",1)
+print(new.get("foo", 1))
+print(new.get("foo", 3))
+new.set("foo", "bar2", 4)
+print(new.get("foo", 4))
+print(new.get("foo", 5))
+'''
+#search a 2d matrix
+'''
+matrix = [
+    [1, 3, 5, 7],
+    [10, 11, 16, 20],
+    [23, 30, 34, 60]
+]
+target = 16
+low = 0
+high = len(matrix) - 1
+binary_search_row=0
+while low <= high:
+    mid = (low + high) // 2
+    if matrix[mid][0] <= target <= matrix[mid][-1]:
+        binary_search_row = mid
+        break
+    elif target < matrix[mid][0]:
+        high = mid - 1
+    else:
+        low = mid + 1
+row = matrix[binary_search_row]
+low = 0
+high = len(row) - 1
+while low <= high:
+    mid = (low + high) // 2
+
+    if row[mid] == target:
+        print(True)
+        break
+
+    elif row[mid] < target:
+        low = mid + 1
+
+    else:
+        high = mid - 1
+else:
+    print(False)
+'''
+#intenchning reverseingcharacter in string
+'''
+string = list("kodnest")
+vowels = ['a', 'e', 'i', 'o', 'u']
+left = 0
+right = len(string) - 1
+while left < right:
+    if string[left] not in vowels and string[right] not in vowels:
+        left += 1
+    elif string[left] in vowels and string[right] not in vowels:
+        right -= 1
+    elif string[left] in vowels and string[right] in vowels:
+        string[left], string[right] = string[right], string[left]
+        left += 1
+        right -= 1
+    else:
+        left += 1
+print("".join(string))
+'''
+#fibonacci using dp
+'''
+def fib(n, dp):
+    if n <= 1:
+        return n
+    if dp[n] != -1:
+        return dp[n]
+    dp[n] = fib(n - 1, dp) + fib(n - 2, dp)
+    return dp[n]
+n = 5
+dp = [-1] * (n + 1)
+print(fib(n, dp))
+'''
+###climbing stairs  using dp
+'''
+def climbingstairs(n,dp):
+    if n==1:
+        return 1
+    if n==2:
+        return 2
+    if dp[n]!=-1:
+        return dp[n]
+    dp[n]=climbingstairs(n-1,dp)+climbingstairs(n-2,dp)
+    return dp[n]
+n=3
+dp=[-1]*(n+1)
+print(climbingstairs(n,dp)) 
+'''
+#third problem based on dynamic programming
+'''
+def min_cost_stairs(cost):
+    n = len(cost)
+    dp = [0] * n
+    dp[0] = cost[0]
+    dp[1] = cost[1]
+    for i in range(2, n):
+        dp[i] = cost[i] + min(dp[i-1], dp[i-2])
+    return min(dp[n-1], dp[n-2])
+cost = [10, 15, 20]
+print(min_cost_stairs(cost))
+'''
+#Rob money using dp
+'''
+def dprob(houses):
+    n = len(houses)
+    dp=[0]*n
+    dp[0]=houses[0]
+    dp[1]=max(houses[0],houses[1])
+    for i in range(2,n):
+        dp[i]=max(houses[i]+dp[i-2],dp[i-1])
+    return dp[n-1]
+houses=[1,2,3,1]
+print(dprob(houses))
+'''
+#coin change dynamic programming
+'''
+def min_coins(coins, amount, dp):
+    if amount == 0:
+        return 0
+    if amount < 0:
+        return float('inf')
+    if dp[amount] != -1:
+        return dp[amount]
+    ans = float('inf')
+    for coin in coins:
+        ans = min(ans, 1 + min_coins(coins, amount - coin, dp))
+    dp[amount] = ans
+    return dp[amount]
+coins = [1, 2, 5]
+amount = 11
+dp = [-1] * (amount + 1)
+answer = min_coins(coins, amount, dp)
+if answer == float('inf'):
+    print(-1)
+else:
+    print(answer)
+'''
+#next level dynamic programming
+#given an array
+'''
+def dparray(nums, dp):
+    dp[0] = 0
+    dp[1] = 0
+
+    for i in nums:
+        dp[i] = i
+
+    for i in range(2, max(nums) + 1):
+        dp[i] = max(dp[i] + dp[i-2], dp[i-1])
+    return max(dp)
+
+nums = [3, 4, 2]
+dp = [0] * (max(nums) + 1)
+print(dparray(nums, dp))
+'''
+#another level dp
+def solve(nums, i, dp):
+    if dp[i] != -1:
+        return dp[i]
+    dp[i] = 1
+    for j in range(i):
+        if nums[j] < nums[i]:
+            dp[i] = max(dp[i], solve(nums, j, dp) + 1)
+    return dp[i]
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+dp = [-1] * len(nums)
+ans = 1
+for i in range(len(nums)):
+    ans = max(ans, solve(nums, i, dp))
+print(ans)
+print(dp)
