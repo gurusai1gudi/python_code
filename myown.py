@@ -8859,6 +8859,7 @@ for i in range(len(s) - 1, -1, -1):
         break
 '''
 #best version
+'''
 def shortest_palindrome(s):
     if not s:
         return ""
@@ -8875,6 +8876,8 @@ def shortest_palindrome(s):
     remaining=s[lps[-1]:]
     return remaining[::-1]+s
 print(shortest_palindrome("aacecaaa"))
+print(shortest_palindrome("adeaada"))
+'''
 ### RPG Greedy method algorithm
 '''
 n = 2
