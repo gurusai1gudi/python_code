@@ -5,6 +5,7 @@ num1=4
 num2=5
 print(sum_addition(num1,num2))
 '''
+#from anyio.pytest_plugin import free_tcp_port
 from prometheus_client import values
 
 '''
@@ -8648,7 +8649,7 @@ while left < right:
 print("".join(string))
 '''
 #fibonacci using dp
-'''
+
 def fib(n, dp):
     if n <= 1:
         return n
@@ -8659,7 +8660,7 @@ def fib(n, dp):
 n = 5
 dp = [-1] * (n + 1)
 print(fib(n, dp))
-'''
+
 ###climbing stairs  using dp
 '''
 def climbingstairs(n,dp):
@@ -8742,7 +8743,8 @@ nums = [3, 4, 2]
 dp = [0] * (max(nums) + 1)
 print(dparray(nums, dp))
 '''
-#another level dp
+#
+'''
 def solve(nums, i, dp):
     if dp[i] != -1:
         return dp[i]
@@ -8758,3 +8760,170 @@ for i in range(len(nums)):
     ans = max(ans, solve(nums, i, dp))
 print(ans)
 print(dp)
+'''
+#next of dynamic programming
+#longest common subsequence
+'''
+def solve(text1,text2,i,j,dp):
+    if i<0 and j<0:
+        return 0
+    if dp[i][j]!=-1:
+        return dp[i][j]
+    if text1[i]==text2[j]:
+        dp[i][j] = 1+solve(text1,text2,i-1,j-1,dp)
+    else:
+        dp[i][j] = max(solve(text1,text2,i-1,j,dp),solve(text1,text2,i,j-1,dp))
+    return dp[i][j]
+
+text1 = "abcde"
+text2 = "ace"
+dp = [[-1] * len(text2) for _ in range(len(text1))]
+'''
+######valid subarray using kadane
+'''
+N = 6
+k = 3
+max_length = 0
+arr = [1, -1, 2, -2, 3, -3]
+for i in range(len(arr)):
+    for j in range(i, len(arr)):
+        new = arr[i:j+1]
+
+        count_negative = 0
+        count_positive = 0
+        for char in new:
+            if char < 0:
+                count_negative += 1
+            elif char > 0:
+                count_positive += 1
+
+        if count_positive == count_negative and sum(new) % k == 0:
+            current_length = len(new)
+            print(new, len(new))
+            if current_length > max_length:
+                max_length = current_length
+print(max_length)
+'''
+#decode the string using dynamic programming
+'''
+def numDecodings(s):
+    if not s or s[0] == '0':
+        return 0
+    n = len(s)
+    dp = [0] * (n + 1)
+    dp[0] = 1
+    dp[1] = 1
+    for i in range(2, n + 1):
+        dp[i] = 0
+        # One digit is valid
+        if s[i - 1] != '0':
+            dp[i] += dp[i - 1]
+        # Two digits are valid
+        if 10 <= int(s[i - 2:i]) <= 26:
+            dp[i] += dp[i - 2]
+    return dp[n]
+s="226"
+print(numDecodings(s))
+'''
+#smallest palindromic rearrangement
+'''
+s = "babab"
+char_count = {}
+left = ""
+middle = ""
+right = ""
+for char in s:
+    if char not in char_count:
+        char_count[char] = 1
+    else:
+        char_count[char] += 1
+for let in sorted(char_count):
+    freq_count = char_count[let] // 2
+    for i in range(freq_count):
+        left += let
+    if char_count[let] % 2 != 0:
+        middle = let
+right = left[::-1]
+final=left+middle+right
+print(final)
+'''
+#shortest palindrome
+'''
+s = "aacecaaa"
+new = ""
+for i in range(len(s) - 1, -1, -1):
+    new += s[i]
+    temp = new + s
+    if temp == temp[::-1]:
+        print(temp)
+        break
+'''
+#best version
+def shortest_palindrome(s):
+    if not s:
+        return ""
+    rev=s[::-1]
+    temp=s+"#"+rev
+    lps=[0]*len(temp)
+    j=0
+    for i in range(1,len(temp)):
+        while j>0 and temp[i]!=temp[j]:
+            j=lps[j-1]
+        if temp[i]==temp[j]:
+            j+=1
+        lps[i]=j
+    remaining=s[lps[-1]:]
+    return remaining[::-1]+s
+print(shortest_palindrome("aacecaaa"))
+### RPG Greedy method algorithm
+'''
+n = 2
+experience = 123
+power = [78, 130]
+bonus = [10, 20]
+mon=[]
+for i in range(n):
+    mon.append((power[i],bonus[i]))
+mon.sort()
+count=0
+while True:
+    max_bonus=-1
+    index=-1
+    for i in range(len(mon)):
+        if mon[i][0]<=experience:
+            max_bonus=mon[i][1]
+            index=i
+    if index==-1:
+        break
+    experience+=mon[index][1]
+    count+=1
+    mon.pop(index)
+print(count)
+print(experience)
+print(max_bonus)
+'''
+#valid arrays
+'''
+n=int(input())
+k=int(input())
+dp=[-1*(n+1) for _ in range(k+1)]
+def solve(length,last):
+    if length==k:
+        return 1
+    if dp[length][last]!=-1:
+        return dp[length][last]
+    ans=0
+    multiple=last
+    while multiple<=n:
+        ans+=solve(length+1,multiple)
+        multiple+=last
+    dp[length][last]=ans%10000
+    return dp[length][last]
+answer=0
+for i in range(1,n+1):
+    answer+=solve(1,i)
+print(answer%10000)
+'''
+#
+
+
