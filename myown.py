@@ -5,6 +5,7 @@ num1=4
 num2=5
 print(sum_addition(num1,num2))
 '''
+import dp
 #from anyio.pytest_plugin import free_tcp_port
 from prometheus_client import values
 
@@ -3345,6 +3346,7 @@ for i in range(n):
 '''
 #
 import math
+
 '''
 intervals = [[1, 3], [2, 6], [8, 10], [15, 18]]
 intervals.sort(key=lambda x: x[0])
@@ -3534,6 +3536,7 @@ print(ram)
 '''
 #count elements greater than previous average
 import math
+
 '''
 def avg(ele):
     average=sum(ele)/len(ele)
@@ -8648,6 +8651,8 @@ while left < right:
         left += 1
 print("".join(string))
 '''
+
+
 #fibonacci using dp
 
 def fib(n, dp):
@@ -8657,6 +8662,8 @@ def fib(n, dp):
         return dp[n]
     dp[n] = fib(n - 1, dp) + fib(n - 2, dp)
     return dp[n]
+
+
 n = 5
 dp = [-1] * (n + 1)
 print(fib(n, dp))
@@ -8927,6 +8934,173 @@ for i in range(1,n+1):
     answer+=solve(1,i)
 print(answer%10000)
 '''
-#
+# dynamic programming problem
+'''
+def solve_snow(i,j,mass):
+    new_dp=[-1]*(i+2)
+    for j in range(i+1):
+        mass=dp[j]
+        mass+=min(d[i][j],mass)
+        new_dp[j]=max(new_dp[j],mass)
+        new_dp[j+1]=max(new_dp[j+1],mass)
+    dp=new_dp
+print(max(dp))
+n = int(input())
+initial_mass = int(input())
+d = []
+for i in range(n):
+    row = list(map(int, input().split()))
+    d.append(row)
+dp=[initial_mass]
+solve_snow
+'''
+#issue with dp
+'''
+def heapify_simple(arr, size, parent):
+    """Makes sure the parent is bigger than its children."""
+    while True:
+        largest = parent
+        left = 2 * parent + 1  # Left child position
+        right = 2 * parent + 2  # Right child position
+        # Is the left child bigger than the parent?
+        if left < size and arr[left] > arr[largest]:
+            largest = left
+        # Is the right child bigger than the parent?
+        if right < size and arr[right] > arr[largest]:
+            largest = right
+        # If the parent is already the biggest, the family is happy! Stop.
+        if largest == parent:
+            break
+        # Otherwise, swap the parent with the bigger child
+        arr[parent], arr[largest] = arr[largest], arr[parent]
+        # Move down to the child's position to check the next family below
+        parent = largest
+def heap_sort(arr):
+    n = len(arr)
+    # Step 1: Build the tree pyramid from the bottom up
+    for i in range(n // 2 - 1, -1, -1):
+        heapify_simple(arr, n, i)
+    # Step 2: Swap the top winner to the back, shrink the tree, and repeat
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]  # Swap winner to the back
+        heapify_simple(arr, i, 0)  # Fix the remaining tree
+    return arr
+# Test it out!
+arr = [34, 22, 15, 35, 41]
+print(heap_sort(arr))
+'''
+# infosys
+'''
+def generate(array):
+    if len(array) == K:
+        valid=True
+        for i in range(len(array)-1):
+            if array[i+1]%array[i]!=0:
+                valid=False
+                break
+        if valid:
+            print(array)
+        return
+    for i in range(1, N + 1):
+        generate(array + [i])
+N=int(input())
+K=int(input())
+generate([])
+'''
+###longest increasing subsequence
+'''
+def max_subsequence(arr):
+    max_count = 0
+    for i in range(len(arr)):
+        count = 1
+        previous = arr[i]
+        for j in range(i + 1, len(arr)):
+            if previous < arr[j]:
+                if (previous & arr[j]) * 2 < (previous | arr[j]):
+                    count += 1
+                    previous = arr[j]
+        if count > max_count:
+            max_count = count
+    return max_count
+array = [15, 6, 5, 12, 1]
+print(max_subsequence(array))
+'''
+# somthing best
+'''
+def swap(string,i,j,cost):
+    string=list(string)
+    string[i],string[j]=string[j],string[i]
+    cost-=swapcost
+    return ''.join(string),cost
 
+def flip(string,i,cost):
+    string=list(string)
+    string[i]="0"
+    cost-=flipcost
+    return ''.join(string),cost
 
+n=4
+string="1111"
+cash=7
+swapcost=1
+flipcost=2
+for i in range(len(string)):
+    if string[i] == '1':
+        if '0' in string[i + 1:]:
+            j = string.index('0', i + 1)
+            if swapcost < flipcost and cash >= swapcost:
+                string, cash = swap(string, i, j, cash)
+            elif cash >= flipcost:
+                string, cash = flip(string, i, cash)
+        else:
+            if cash >= flipcost:
+                string, cash = flip(string, i, cash)
+print(string)
+print(cash)
+'''
+###xor operation
+'''
+def generate(pairs, start, n, max_xor):
+    if len(pairs) == n // 2:
+        xor_value = 0
+        for i in range(len(pairs)):
+            xor_value = xor_value ^ pairs[i]
+        if xor_value > max_xor:
+            max_xor = xor_value
+        return max_xor
+    for i in range(start, len(arr)):
+        max_xor = generate(pairs + [arr[i]], i + 1, n, max_xor)
+    return max_xor
+arr = [1, 2, 4, 7]
+n = len(arr)
+max_xor = max(arr)
+max_xor = generate([], 0, n, max_xor)
+print(max_xor)
+'''
+# another infosys
+'''
+days = 7
+values = []
+obligations = 4
+k = 2
+obligation_days = [2, 3, 4, 6]
+for i in range(1, days + 1):
+    values.append(i)
+left = 0
+right = 0
+max_days = 0
+while right < len(values):
+    count = 0
+    for day in values[left:right + 1]:
+        if day in obligation_days:
+            count += 1
+    if count <= k:
+        length = right - left + 1
+        if length > max_days:
+            max_days = length
+    else:
+        left += 1
+        continue
+    right += 1
+print(max_days)
+'''
